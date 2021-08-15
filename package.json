@@ -46,6 +46,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.12.2",
+    "uuid": "^8.3.2",
     "yup": "^0.32.9"
   },
   "resolutions": {
@@ -81,6 +82,7 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.6.1",
     "@types/react": "17.0.17",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "aws-cdk": "^1.118.0",
     "babel-eslint": "^10.1.0",
