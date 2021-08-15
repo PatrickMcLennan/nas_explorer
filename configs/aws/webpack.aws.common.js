@@ -10,6 +10,7 @@ module.exports = {
     stack: path.resolve(__dirname, `../../aws/stack.ts`),
     hello: path.resolve(__dirname, `../../aws/lambdas/hello.ts`),
     postImages: path.resolve(__dirname, `../../aws/lambdas/postImages.ts`),
+    postMovies: path.resolve(__dirname, `../../aws/lambdas/postMovies.ts`),
   },
   // externals: [nodeExternals()],
   output: {
