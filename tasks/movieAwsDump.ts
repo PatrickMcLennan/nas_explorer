@@ -18,13 +18,12 @@ async function dumpMovies() {
 
   try {
     const allFiles = await promises.readdir(MOVIES_DIR?.toString?.() ?? ``);
-    movies = allFiles.reduce((all: { title: string, tmdbId: string }[], current: string) => {
+    movies = allFiles.reduce((all: { title: string; tmdbId: string }[], current: string) => {
       if (!movieExtMap.has(path.extname(current))) return all;
       const tmdbId = getTmdbId(current);
       if (!tmdbId) return all;
-      return [...all, { title: current, tmdbId }]
-    }, [])
-    movies = allFiles.filter((fileName) => movieExtMap.has(path.extname(fileName) && ));
+      return [...all, { title: current, tmdbId }];
+    }, []);
   } catch (dirError) {
     console.error(`There was a problem reading ${IMAGES_DIR}: \n${dirError}`);
     return process.exit(1);
