@@ -26,7 +26,7 @@ async function dumpImages() {
       },
     });
   } catch (axiosError) {
-    console.error(`There was a problem reading ${IMAGES_DIR}: \n${axiosError}`);
+    console.error(`Error returned from axios + aws: \n${axiosError}`);
     return process.exit(1);
   }
 
