@@ -1,7 +1,19 @@
 import Knex from 'knex';
-import knexfile from '../knexfile';
-const environment = process.env.NODE_ENV || 'development';
+import { DATABASE_URL_PRODUCTION, DATABASE_URL_DEVELOPMENT, NODE_ENV } from '../env';
 
-const config = knexfile[environment];
+import path from 'path';
 
-export default Knex(config);
+const knexfile: Knex.Config = {
+  client: `pg`,
+  connection: {
+    connectionString: NODE_ENV === `production` ? DATABASE_URL_PRODUCTION : DATABASE_URL_DEVELOPMENT,
+  },
+  migrations: {
+    directory: path.resolve(__dirname, `./postgres/migrations`),
+  },
+  seeds: {
+    directory: path.resolve(__dirname + '/postgres/seeds/development'),
+  },
+};
+
+export default Knex(knexfile);
