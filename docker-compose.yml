@@ -31,7 +31,7 @@ services:
       TMDB_API_KEY: ${TMDB_API_KEY}
     depends_on:
       - postgres
-    command: node express/dist/server.js
+    command: npx pm2-runtime start pm2.config.js
     working_dir: /app
     volumes:
       - ./:/app
