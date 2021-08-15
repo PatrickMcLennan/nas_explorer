@@ -73,7 +73,7 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
     return new DynamoDB()
       .batchWriteItem({
         RequestItems: {
-          nas_media: newImages.map((image: string) => ({
+          nas_media: newImages.slice(0, 25).map((image: string) => ({
             PutRequest: {
               Item: {
                 id: {
@@ -86,6 +86,7 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
             },
           })),
         },
+        // Table
       })
       .promise()
       .then((res) => {
