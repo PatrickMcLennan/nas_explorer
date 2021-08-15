@@ -27,7 +27,6 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'swc-loader',
-        // exclude: /node_modules/,
       },
     ],
   },
