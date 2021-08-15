@@ -7,6 +7,7 @@ module.exports = {
   context: __dirname,
   entry: {
     imageAwsDump: path.resolve(__dirname, `../../tasks/imageAwsDump.ts`),
+    movieAwsDump: path.resolve(__dirname, `../../tasks/movieAwsDump.ts`),
   },
   externals: [nodeExternals()],
 
