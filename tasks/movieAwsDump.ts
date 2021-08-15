@@ -3,7 +3,7 @@
  */
 import { promises } from 'fs';
 import { awsAxiosClient } from '../clients/awsAxios.client';
-import { IMAGES_DIR, MOVIES_DIR } from '../env';
+import { MOVIES_DIR } from '../env';
 import path from 'path';
 import getTmdbId from '../lib/getTmdbId.lib';
 
@@ -25,7 +25,7 @@ async function dumpMovies() {
       return [...all, { title: current, tmdbId }];
     }, []);
   } catch (dirError) {
-    console.error(`There was a problem reading ${IMAGES_DIR}: \n${dirError}`);
+    console.error(`There was a problem reading ${MOVIES_DIR}: \n${dirError}`);
     return process.exit(1);
   }
 

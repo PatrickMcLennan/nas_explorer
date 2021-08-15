@@ -12,6 +12,7 @@ export class Stack extends cdk.Stack {
     const v1 = api.addResource(`v1`);
 
     const images = v1.addResource(`images`);
+    const movies = v1.addResource(`movies`);
 
     let table = Table.fromTableName(this, `nas_media`, `nas_media`);
 
@@ -42,6 +43,14 @@ export class Stack extends cdk.Stack {
     });
     images.addMethod(`POST`, new LambdaIntegration(postImagesHandler));
 
+    const postMoviesHandler = new Function(this, `PostMoviesHandler`, {
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(`./aws/dist`),
+      handler: `postMovies.handler`,
+    });
+    movies.addMethod(`POST`, new LambdaIntegration(postMoviesHandler));
+
     table.grantReadWriteData(postImagesHandler);
+    table.grantReadWriteData(postMoviesHandler);
   }
 }
