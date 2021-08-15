@@ -48,10 +48,11 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
 
   try {
     const dynamoMoviesMap = new Map<string, null>();
-    currentMovies?.forEach?.(({ id: { S } }) => dynamoMoviesMap.set(S ?? ``, null));
+    currentMovies?.forEach?.(({ title: { S } }) => dynamoMoviesMap.set(S ?? ``, null));
 
     newMovies = sentMovies.reduce(
-      (all: string[], current: string) => (dynamoMoviesMap.has(current) ? all : [...all, current]),
+      (all: string[], current: { title: string; tmdbId: string }) =>
+        dynamoMoviesMap.has(current.title) ? all : [...all, current],
       []
     );
   } catch (movieComparisonError) {
