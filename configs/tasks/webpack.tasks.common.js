@@ -1,0 +1,30 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+
+module.exports = {
+  target: 'node',
+  context: __dirname,
+  entry: {
+    imageAwsDump: path.resolve(__dirname, `../../tasks/imageAwsDump.ts`),
+  },
+  externals: [nodeExternals()],
+
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, '../../tasks/dist'),
+    libraryTarget: 'commonjs',
+  },
+
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'swc-loader',
+      },
+    ],
+  },
+};

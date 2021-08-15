@@ -1,0 +1,5 @@
+{
+  "watch": ["./express/dist/server.js"],
+  "ext": "ts,json",
+  "exec": "node ./express/dist/server.js"
+}

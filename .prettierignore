@@ -1,0 +1,4 @@
+aws/dist/
+express/dist/
+
+hooks/generated.hooks.ts
