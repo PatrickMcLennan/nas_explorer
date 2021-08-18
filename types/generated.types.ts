@@ -11,6 +11,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type DynamoMovie = {
+  __typename?: 'DynamoMovie';
+  title: Scalars['String'];
+  tmdbId: Scalars['String'];
+  id: Scalars['String'];
+  mediaType: Scalars['String'];
+};
+
 export type Image = {
   __typename?: 'Image';
   name: Scalars['String'];
@@ -19,6 +27,7 @@ export type Image = {
 export type Query = {
   __typename?: 'Query';
   getImages?: Maybe<Array<Maybe<Image>>>;
+  getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
 };
 
 
@@ -32,3 +41,8 @@ export type GetImagesQueryVariables = Exact<{
 
 
 export type GetImagesQuery = { __typename?: 'Query', getImages?: Maybe<Array<Maybe<{ __typename?: 'Image', name: string }>>> };
+
+export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: Maybe<Array<Maybe<{ __typename?: 'DynamoMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };

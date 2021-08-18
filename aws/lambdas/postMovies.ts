@@ -94,13 +94,10 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
         },
       })
       .promise()
-      .then((res) => {
-        console.log(res);
-        return {
-          statusCode: 200,
-          body: `Movies dumped`,
-        };
-      });
+      .then(() => ({
+        statusCode: 200,
+        body: `Movies dumped`,
+      }));
   } catch (batchInsertError) {
     console.error(batchInsertError);
     return {

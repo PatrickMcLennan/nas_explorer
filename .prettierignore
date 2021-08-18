@@ -1,4 +1,5 @@
 aws/dist/
 express/dist/
 
-hooks/generated.hooks.ts
+hooks/generated.hooks.tsx
+types/generated.types.ts

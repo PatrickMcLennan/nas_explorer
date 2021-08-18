@@ -14,6 +14,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type DynamoMovie = {
+  __typename?: 'DynamoMovie';
+  title: Scalars['String'];
+  tmdbId: Scalars['String'];
+  id: Scalars['String'];
+  mediaType: Scalars['String'];
+};
+
 export type Image = {
   __typename?: 'Image';
   name: Scalars['String'];
@@ -22,6 +30,7 @@ export type Image = {
 export type Query = {
   __typename?: 'Query';
   getImages?: Maybe<Array<Maybe<Image>>>;
+  getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
 };
 
 
@@ -35,6 +44,11 @@ export type GetImagesQueryVariables = Exact<{
 
 
 export type GetImagesQuery = { __typename?: 'Query', getImages?: Maybe<Array<Maybe<{ __typename?: 'Image', name: string }>>> };
+
+export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: Maybe<Array<Maybe<{ __typename?: 'DynamoMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };
 
 
 export const GetImagesDocument = gql`
@@ -72,3 +86,40 @@ export function useGetImagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type GetImagesQueryHookResult = ReturnType<typeof useGetImagesQuery>;
 export type GetImagesLazyQueryHookResult = ReturnType<typeof useGetImagesLazyQuery>;
 export type GetImagesQueryResult = Apollo.QueryResult<GetImagesQuery, GetImagesQueryVariables>;
+export const GetDynamoMoviesDocument = gql`
+    query getDynamoMovies {
+  getDynamoMovies {
+    title
+    tmdbId
+    id
+    mediaType
+  }
+}
+    `;
+
+/**
+ * __useGetDynamoMoviesQuery__
+ *
+ * To run a query within a React component, call `useGetDynamoMoviesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDynamoMoviesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDynamoMoviesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetDynamoMoviesQuery(baseOptions?: Apollo.QueryHookOptions<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>(GetDynamoMoviesDocument, options);
+      }
+export function useGetDynamoMoviesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>(GetDynamoMoviesDocument, options);
+        }
+export type GetDynamoMoviesQueryHookResult = ReturnType<typeof useGetDynamoMoviesQuery>;
+export type GetDynamoMoviesLazyQueryHookResult = ReturnType<typeof useGetDynamoMoviesLazyQuery>;
+export type GetDynamoMoviesQueryResult = Apollo.QueryResult<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>;

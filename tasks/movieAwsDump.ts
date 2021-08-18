@@ -1,11 +1,13 @@
 /**
- * Scan local dir for all movies, send to AWS to update DynamoDB
+ * Scan local dir for all movies, compare against what's currently in Dynamo,
+ * POST the new movies
  */
 import { promises } from 'fs';
 import { awsAxiosClient } from '../clients/awsAxios.client';
 import { MOVIES_DIR } from '../env';
 import path from 'path';
 import getTmdbId from '../lib/getTmdbId.lib';
+import { DynamoMovie } from '../types/generated.types';
 
 async function dumpMovies() {
   const movieExtMap = new Map([
@@ -29,20 +31,48 @@ async function dumpMovies() {
     return process.exit(1);
   }
 
+  const dynamoMovieMap = new Map<string, null>();
+
+  try {
+    const { data } = await awsAxiosClient({
+      method: `GET`,
+      url: `/movies`,
+    });
+    data.forEach(({ tmdbId }: DynamoMovie) => dynamoMovieMap.set(tmdbId, null));
+  } catch (dynamoGetError) {
+    console.error(`Error fetching new movies and creating map: \n${dynamoGetError}`);
+    return process.exit(1);
+  }
+
+  let newMovies;
+
+  try {
+    newMovies = movies.filter(({ tmdbId }) => {
+      if (!dynamoMovieMap.has(tmdbId)) {
+        dynamoMovieMap.delete(tmdbId);
+        return true;
+      } else {
+        return false;
+      }
+    });
+  } catch (movieFilterError) {
+    console.error(`Error comparing the hdd movies to dynamo: \n${movieFilterError}`);
+    return process.exit(1);
+  }
+
   try {
     await awsAxiosClient({
       method: `POST`,
       url: `/movies`,
       data: {
-        movies,
+        movies: newMovies,
       },
     });
-  } catch (axiosError) {
-    console.error(`Error returned from axios + aws: \n${axiosError}`);
+    return process.exit(0);
+  } catch (dynamoPostError) {
+    console.error(`Error returned from axios + aws: \n${dynamoPostError}`);
     return process.exit(1);
   }
-
-  return process.exit(0);
 }
 
 dumpMovies();

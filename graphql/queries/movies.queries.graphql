@@ -1,0 +1,8 @@
+query getDynamoMovies {
+  getDynamoMovies {
+    title
+    tmdbId
+    id
+    mediaType
+  }
+}

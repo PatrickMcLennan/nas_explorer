@@ -34,13 +34,13 @@ yarn-error.log*
 # vercel
 .vercel
 
-express/dist/**.*.js
-aws/dist/**.*.js
-clients/**.*.js
-stories/**.*.js
-components/**.*.js
-pages/**.*.js
-validators/**.*.js
+express/dist/
+aws/dist/
+clients/
+stories/
+components/
+pages/
+validators/
 static/
 tasks/dist/
 cdk.out/

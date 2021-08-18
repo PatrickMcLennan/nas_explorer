@@ -19,8 +19,7 @@ export const WALLPAPER_PLAY = process.env.WALLPAPER_PLAY;
 export const WALLHAVEN = process.env.WALLHAVEN;
 
 export const ALPHA_CODERS = process.env.ALPHA_CODERS;
-export const DEV_URL = process.env.DEV_URL;
-export const PROD_URL = process.env.PROD_URL;
+export const EXPRESS = process.env.EXPRESS;
 
 export const IMAGES_DIR = process.env.IMAGES_DIR;
 export const MOVIES_DIR = process.env.MOVIES_DIR;

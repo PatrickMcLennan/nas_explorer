@@ -24,7 +24,10 @@
     "watch:tasks": "webpack --watch --config ./configs/tasks/webpack.tasks.dev.js",
     "compile:all:dev": "concurrently 'npm run compile:aws:dev' 'npm run compile:express:dev' 'npm run compile:tasks:dev'",
     "compile:all:prod": "concurrently 'npm run compile:aws:prod' 'npm run compile:express:prod' 'npm run compile:tasks:prod'",
-    "codegen:generate:dev": "DOTENV_CONFIG_PATH=./.env graphql-codegen -r dotenv/config --config ./codegen.yml"
+    "codegen:generate:dev": "DOTENV_CONFIG_PATH=./.env graphql-codegen -r dotenv/config --config ./codegen.yml",
+    "migrate": "npx knex migrate:make 01_movies -x ts",
+    "migrate:up": "npx knex migrate:up",
+    "migrate:down": "npx knex migrate:down"
   },
   "dependencies": {
     "@apollo/client": "^3.4.7",
@@ -42,6 +45,7 @@
     "knex": "^0.21.21",
     "morgan": "^1.10.0",
     "next": "11.1.0",
+    "pg": "^8.7.1",
     "pm2": "^5.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",

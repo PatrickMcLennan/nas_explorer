@@ -5,6 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from '../graphql/typeDefs/typeDefs';
 import { resolvers } from '../graphql/resolvers/resolvers';
 import { HTTP_PORT } from '../env';
+import Knex from '../postgres/knex';
 
 const corsOptions = {
   origin: `*`,
@@ -15,6 +16,9 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: () => ({
+      db: Knex(),
+    }),
   });
 
   app.use(morgan(`:method :url :status :res[content-length] - :response-time ms`));

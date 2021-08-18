@@ -43,6 +43,13 @@ export class Stack extends cdk.Stack {
     });
     images.addMethod(`POST`, new LambdaIntegration(postImagesHandler));
 
+    const getMoviesHandler = new Function(this, `GetMoviesHandler`, {
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(`./aws/dist`),
+      handler: `getMovies.handler`,
+    });
+    movies.addMethod(`GET`, new LambdaIntegration(getMoviesHandler));
+
     const postMoviesHandler = new Function(this, `PostMoviesHandler`, {
       runtime: Runtime.NODEJS_14_X,
       code: Code.fromAsset(`./aws/dist`),
@@ -52,5 +59,6 @@ export class Stack extends cdk.Stack {
 
     table.grantReadWriteData(postImagesHandler);
     table.grantReadWriteData(postMoviesHandler);
+    table.grantReadWriteData(getMoviesHandler);
   }
 }
