@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export -o static",
+    "export": "next build && next export -o html",
     "test": "jest",
     "test:watch": "jest --weatchAll",
     "lint": "next lint",

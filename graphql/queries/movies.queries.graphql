@@ -6,3 +6,21 @@ query getDynamoMovies {
     mediaType
   }
 }
+
+query getPostgresMovies {
+  getPostgresMovies {
+    title
+    tmdbId
+    id
+    mediaType
+  }
+}
+
+query getPostgresMovie($id: String!) {
+  getPostgresMovie(id: $id) {
+    title
+    tmdbId
+    id
+    mediaType
+  }
+}

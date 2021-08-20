@@ -41,6 +41,6 @@ stories/
 components/
 pages/
 validators/
-static/
+html/
 tasks/dist/
 cdk.out/

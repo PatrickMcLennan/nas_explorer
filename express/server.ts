@@ -6,6 +6,7 @@ import { typeDefs } from '../graphql/typeDefs/typeDefs';
 import { resolvers } from '../graphql/resolvers/resolvers';
 import { HTTP_PORT } from '../env';
 import Knex from '../postgres/knex';
+import path from 'path';
 
 const corsOptions = {
   origin: `*`,
@@ -17,7 +18,7 @@ async function startServer() {
     typeDefs,
     resolvers,
     context: () => ({
-      db: Knex(),
+      db: Knex,
     }),
   });
 
@@ -27,6 +28,7 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app, path: `/api/graphql` });
   app.listen({ port: HTTP_PORT }, () => console.log(`App is listening on Port ${HTTP_PORT}`));
+  app.use(express.static(path.resolve(__dirname, `../../html`)));
 }
 
 try {

@@ -6,7 +6,13 @@ export const typeDefs = gql`
   }
 
   type DynamoMovie {
-    title:  String!
+    title: String!
+    tmdbId: String!
+    id: String!
+    mediaType: String!
+  }
+  type PostgresMovie {
+    title: String!
     tmdbId: String!
     id: String!
     mediaType: String!
@@ -15,5 +21,7 @@ export const typeDefs = gql`
   type Query {
     getImages(page: Int!): [Image]
     getDynamoMovies: [DynamoMovie]
+    getPostgresMovies: [PostgresMovie]
+    getPostgresMovie(id: String!): PostgresMovie!
   }
 `;
