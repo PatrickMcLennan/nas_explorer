@@ -1,0 +1,29 @@
+query getCollections {
+  getCollections {
+    ... on Collection {
+      id
+      createdAt
+      updatedAt
+      name
+      tmdbId
+      overview
+      posterPath
+      backdropPath
+      parts
+    }
+  }
+}
+
+query getCollection($id: String!) {
+  getCollection(id: $id) {
+    id
+    createdAt
+    updatedAt
+    name
+    tmdbId
+    overview
+    posterPath
+    backdropPath
+    parts
+  }
+}

@@ -1,0 +1,21 @@
+query getGenres {
+  getGenres {
+    ... on Genre {
+      id
+      createdAt
+      updatedAt
+      tmdbId
+      name
+    }
+  }
+}
+
+query getGenre($id: String!) {
+  getGenre(id: $id) {
+    id
+    createdAt
+    updatedAt
+    tmdbId
+    name
+  }
+}

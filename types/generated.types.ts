@@ -9,7 +9,168 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
+  BigInt: any;
+  /** The `Byte` scalar type represents byte value as a Buffer */
+  Byte: any;
+  /** A field whose value is a Currency: https://en.wikipedia.org/wiki/ISO_4217. */
+  Currency: any;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  DateTime: any;
+  /**
+   *
+   *     A string representing a duration conforming to the ISO8601 standard,
+   *     such as: P1W1DT13H23M34S
+   *     P is the duration designator (for period) placed at the start of the duration representation.
+   *     Y is the year designator that follows the value for the number of years.
+   *     M is the month designator that follows the value for the number of months.
+   *     W is the week designator that follows the value for the number of weeks.
+   *     D is the day designator that follows the value for the number of days.
+   *     T is the time designator that precedes the time components of the representation.
+   *     H is the hour designator that follows the value for the number of hours.
+   *     M is the minute designator that follows the value for the number of minutes.
+   *     S is the second designator that follows the value for the number of seconds.
+   *
+   *     Note the time designator, T, that precedes the time value.
+   *
+   *     Matches moment.js, Luxon and DateFns implementations
+   *     ,/. is valid for decimal places and +/- is a valid prefix
+   *
+   */
+  Duration: any;
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  EmailAddress: any;
+  /** A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier. */
+  GUID: any;
+  /** A field whose value is a CSS HSL color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#hsl()_and_hsla(). */
+  HSL: any;
+  /** A field whose value is a CSS HSLA color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#hsl()_and_hsla(). */
+  HSLA: any;
+  /** A field whose value is a hex color code: https://en.wikipedia.org/wiki/Web_colors. */
+  HexColorCode: any;
+  /** A field whose value is a hexadecimal: https://en.wikipedia.org/wiki/Hexadecimal. */
+  Hexadecimal: any;
+  /** A field whose value is an International Bank Account Number (IBAN): https://en.wikipedia.org/wiki/International_Bank_Account_Number. */
+  IBAN: any;
+  /** A field whose value is a IPv4 address: https://en.wikipedia.org/wiki/IPv4. */
+  IPv4: any;
+  /** A field whose value is a IPv6 address: https://en.wikipedia.org/wiki/IPv6. */
+  IPv6: any;
+  /** A field whose value is a ISBN-10 or ISBN-13 number: https://en.wikipedia.org/wiki/International_Standard_Book_Number. */
+  ISBN: any;
+  /**
+   *
+   *     A string representing a duration conforming to the ISO8601 standard,
+   *     such as: P1W1DT13H23M34S
+   *     P is the duration designator (for period) placed at the start of the duration representation.
+   *     Y is the year designator that follows the value for the number of years.
+   *     M is the month designator that follows the value for the number of months.
+   *     W is the week designator that follows the value for the number of weeks.
+   *     D is the day designator that follows the value for the number of days.
+   *     T is the time designator that precedes the time components of the representation.
+   *     H is the hour designator that follows the value for the number of hours.
+   *     M is the minute designator that follows the value for the number of minutes.
+   *     S is the second designator that follows the value for the number of seconds.
+   *
+   *     Note the time designator, T, that precedes the time value.
+   *
+   *     Matches moment.js, Luxon and DateFns implementations
+   *     ,/. is valid for decimal places and +/- is a valid prefix
+   *
+   */
+  ISO8601Duration: any;
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSON: any;
+  /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
+  JSONObject: any;
+  /** A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction. */
+  JWT: any;
+  /** A field whose value is a valid decimal degrees latitude number (53.471): https://en.wikipedia.org/wiki/Latitude */
+  Latitude: any;
+  /** A local date string (i.e., with no associated timezone) in `YYYY-MM-DD` format, e.g. `2020-01-01`. */
+  LocalDate: any;
+  /** A local time string (i.e., with no associated timezone) in 24-hr `HH:mm[:ss[.SSS]]` format, e.g. `14:25` or `14:25:06` or `14:25:06.123`.  This scalar is very similar to the `LocalTime`, with the only difference being that `LocalEndTime` also allows `24:00` as a valid value to indicate midnight of the following day.  This is useful when using the scalar to represent the exclusive upper bound of a time block. */
+  LocalEndTime: any;
+  /** A local time string (i.e., with no associated timezone) in 24-hr `HH:mm[:ss[.SSS]]` format, e.g. `14:25` or `14:25:06` or `14:25:06.123`. */
+  LocalTime: any;
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
+  Long: any;
+  /** A field whose value is a valid decimal degrees longitude number (53.471): https://en.wikipedia.org/wiki/Longitude */
+  Longitude: any;
+  /** A field whose value is a IEEE 802 48-bit MAC address: https://en.wikipedia.org/wiki/MAC_address. */
+  MAC: any;
+  /** Floats that will have a value less than 0. */
+  NegativeFloat: any;
+  /** Integers that will have a value less than 0. */
+  NegativeInt: any;
+  /** A string that cannot be passed as an empty value */
+  NonEmptyString: any;
+  /** Floats that will have a value of 0 or more. */
+  NonNegativeFloat: any;
+  /** Integers that will have a value of 0 or more. */
+  NonNegativeInt: any;
+  /** Floats that will have a value of 0 or less. */
+  NonPositiveFloat: any;
+  /** Integers that will have a value of 0 or less. */
+  NonPositiveInt: any;
+  /** A field whose value conforms with the standard mongodb object ID as described here: https://docs.mongodb.com/manual/reference/method/ObjectId/#ObjectId. Example: 5e5677d71bdc2ae76344968c */
+  ObjectID: any;
+  /** A field whose value conforms to the standard E.164 format as specified in: https://en.wikipedia.org/wiki/E.164. Basically this is +17895551234. */
+  PhoneNumber: any;
+  /** A field whose value is a valid TCP port within the range of 0 to 65535: https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_ports */
+  Port: any;
+  /** Floats that will have a value greater than 0. */
+  PositiveFloat: any;
+  /** Integers that will have a value greater than 0. */
+  PositiveInt: any;
+  /** A field whose value conforms to the standard postal code formats for United States, United Kingdom, Germany, Canada, France, Italy, Australia, Netherlands, Spain, Denmark, Sweden, Belgium, India, Austria, Portugal, Switzerland or Luxembourg. */
+  PostalCode: any;
+  /** A field whose value is a CSS RGB color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba(). */
+  RGB: any;
+  /** A field whose value is a CSS RGBA color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba(). */
+  RGBA: any;
+  /** The `SafeInt` scalar type represents non-fractional signed whole numeric values that are considered safe as defined by the ECMAScript specification. */
+  SafeInt: any;
+  /** A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Time: any;
+  /** The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch. */
+  Timestamp: any;
+  /** A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt. */
+  URL: any;
+  /** A currency string, such as $21.25 */
+  USCurrency: any;
+  /** A field whose value is a generic Universally Unique Identifier: https://en.wikipedia.org/wiki/Universally_unique_identifier. */
+  UUID: any;
+  /** Floats that will have a value of 0 or more. */
+  UnsignedFloat: any;
+  /** Integers that will have a value of 0 or more. */
+  UnsignedInt: any;
+  /** A field whose value is a UTC Offset: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones */
+  UtcOffset: any;
+  /** Represents NULL values */
+  Void: any;
 };
+
+
+
+export type Collection = {
+  __typename?: 'Collection';
+  id: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  name: Scalars['String'];
+  tmdbId: Scalars['String'];
+  overview: Scalars['String'];
+  posterPath?: Maybe<Scalars['String']>;
+  backdropPath?: Maybe<Scalars['String']>;
+  parts: Array<Maybe<Scalars['String']>>;
+};
+
+
+
+
 
 export type DynamoMovie = {
   __typename?: 'DynamoMovie';
@@ -19,25 +180,148 @@ export type DynamoMovie = {
   mediaType: Scalars['String'];
 };
 
+
+
+export type Genre = {
+  __typename?: 'Genre';
+  id: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  tmdbId: Scalars['String'];
+  name: Scalars['String'];
+};
+
+
+
+
+
+
+
+
+
+
 export type Image = {
   __typename?: 'Image';
   name: Scalars['String'];
 };
 
+
+
+
+
+
+
+
+
+
+
+export type MovieTrailer = {
+  __typename?: 'MovieTrailer';
+  id: Scalars['String'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+  iso_639_1?: Maybe<Scalars['Timestamp']>;
+  iso_3166_1?: Maybe<Scalars['Timestamp']>;
+  name?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  site?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['String']>;
+  official?: Maybe<Scalars['Boolean']>;
+  publishedAt?: Maybe<Scalars['Timestamp']>;
+  tmdbId: Scalars['String'];
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export type PostgresMovie = {
   __typename?: 'PostgresMovie';
-  title: Scalars['String'];
-  tmdbId: Scalars['String'];
+  adult: Scalars['Boolean'];
+  backdropPath?: Maybe<Scalars['String']>;
+  collection?: Maybe<Scalars['String']>;
+  budget: Scalars['BigInt'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  fileName: Scalars['String'];
+  genres?: Maybe<Array<Maybe<Scalars['String']>>>;
+  homepage?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  mediaType: Scalars['String'];
+  tmdbId: Scalars['String'];
+  imdbId?: Maybe<Scalars['String']>;
+  originalLanguage: Scalars['String'];
+  originalTitle: Scalars['String'];
+  overview?: Maybe<Scalars['String']>;
+  popularity?: Maybe<Scalars['Float']>;
+  posterPath?: Maybe<Scalars['String']>;
+  productionCompanies?: Maybe<Array<Maybe<Scalars['String']>>>;
+  productionCountries?: Maybe<Array<Maybe<Scalars['String']>>>;
+  releaseDate: Scalars['String'];
+  revenue: Scalars['BigInt'];
+  runtime?: Maybe<Scalars['Int']>;
+  spokenLanguages?: Maybe<Array<Maybe<Scalars['String']>>>;
+  status: Scalars['String'];
+  tagline?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  trailers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  video: Scalars['Boolean'];
+  voteAverage: Scalars['Float'];
+  voteCount: Scalars['Int'];
+};
+
+export type ProductionCompany = {
+  __typename?: 'ProductionCompany';
+  id: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  name: Scalars['String'];
+  tmdbId: Scalars['String'];
+  logoPath?: Maybe<Scalars['String']>;
+  originCountry: Scalars['String'];
+};
+
+export type ProductionCountry = {
+  __typename?: 'ProductionCountry';
+  id: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  iso_3166_1: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Query = {
   __typename?: 'Query';
+  getCollection?: Maybe<Collection>;
+  getCollections?: Maybe<Array<Maybe<Collection>>>;
   getImages?: Maybe<Array<Maybe<Image>>>;
   getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
+  getGenres?: Maybe<Array<Maybe<Genre>>>;
+  getGenre?: Maybe<Genre>;
+  getMovieTrailer?: Maybe<MovieTrailer>;
+  getMovieTrailers?: Maybe<Array<Maybe<MovieTrailer>>>;
   getPostgresMovies?: Maybe<Array<Maybe<PostgresMovie>>>;
   getPostgresMovie: PostgresMovie;
+  getProductionCompany?: Maybe<ProductionCompany>;
+  getProductionCompanies?: Maybe<Array<Maybe<ProductionCompany>>>;
+  getProductionCountries?: Maybe<Array<Maybe<ProductionCountry>>>;
+  getProductionCountry?: Maybe<ProductionCountry>;
+  getSpokenLanguages?: Maybe<Array<Maybe<SpokenLanguage>>>;
+  getSpokenLanguage?: Maybe<SpokenLanguage>;
+};
+
+
+export type QueryGetCollectionArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -46,9 +330,80 @@ export type QueryGetImagesArgs = {
 };
 
 
+export type QueryGetGenreArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryGetMovieTrailerArgs = {
+  id: Scalars['String'];
+};
+
+
 export type QueryGetPostgresMovieArgs = {
   id: Scalars['String'];
 };
+
+
+export type QueryGetProductionCompanyArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryGetProductionCountryArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryGetSpokenLanguageArgs = {
+  id: Scalars['String'];
+};
+
+
+
+
+export type SpokenLanguage = {
+  __typename?: 'SpokenLanguage';
+  id: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  iso_639_1: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  englishName?: Maybe<Scalars['String']>;
+};
+
+
+
+
+
+
+
+
+
+
+export type GetCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCollectionsQuery = { __typename?: 'Query', getCollections?: Maybe<Array<Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }>>> };
+
+export type GetCollectionQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetCollectionQuery = { __typename?: 'Query', getCollection?: Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }> };
+
+export type GetGenresQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetGenresQuery = { __typename?: 'Query', getGenres?: Maybe<Array<Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }>>> };
+
+export type GetGenreQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetGenreQuery = { __typename?: 'Query', getGenre?: Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }> };
 
 export type GetImagesQueryVariables = Exact<{
   page: Scalars['Int'];
@@ -56,6 +411,18 @@ export type GetImagesQueryVariables = Exact<{
 
 
 export type GetImagesQuery = { __typename?: 'Query', getImages?: Maybe<Array<Maybe<{ __typename?: 'Image', name: string }>>> };
+
+export type GetMovieTrailersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }>>> };
+
+export type GetMovieTrailerQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetMovieTrailerQuery = { __typename?: 'Query', getMovieTrailer?: Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }> };
 
 export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -65,11 +432,47 @@ export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: May
 export type GetPostgresMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };
+export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>> };
 
 export type GetPostgresMovieQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie: { __typename?: 'PostgresMovie', title: string, tmdbId: string, id: string, mediaType: string } };
+export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie: { __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number } };
+
+export type GetProductionCompaniesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProductionCompaniesQuery = { __typename?: 'Query', getProductionCompanies?: Maybe<Array<Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }>>> };
+
+export type GetProductionCompanyQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetProductionCompanyQuery = { __typename?: 'Query', getProductionCompany?: Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }> };
+
+export type GetProductionCountriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProductionCountriesQuery = { __typename?: 'Query', getProductionCountries?: Maybe<Array<Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }>>> };
+
+export type GetProductionCountryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetProductionCountryQuery = { __typename?: 'Query', getProductionCountry?: Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }> };
+
+export type GetSpokenLanguagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSpokenLanguagesQuery = { __typename?: 'Query', getSpokenLanguages?: Maybe<Array<Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }>>> };
+
+export type GetSpokenLanguageQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetSpokenLanguageQuery = { __typename?: 'Query', getSpokenLanguage?: Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }> };

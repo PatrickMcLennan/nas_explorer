@@ -1,0 +1,37 @@
+query getMovieTrailers {
+  getMovieTrailers {
+    ... on MovieTrailer {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      iso_3166_1
+      name
+      key
+      site
+      size
+      type
+      official
+      publishedAt
+      tmdbId
+    }
+  }
+}
+
+query getMovieTrailer($id: String!) {
+  getMovieTrailer(id: $id) {
+    id
+    createdAt
+    updatedAt
+    iso_639_1
+    iso_3166_1
+    name
+    key
+    site
+    size
+    type
+    official
+    publishedAt
+    tmdbId
+  }
+}

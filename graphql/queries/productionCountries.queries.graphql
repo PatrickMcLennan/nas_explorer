@@ -1,0 +1,21 @@
+query getProductionCountries {
+  getProductionCountries {
+    ... on ProductionCountry {
+      id
+      createdAt
+      updatedAt
+      iso_3166_1
+      name
+    }
+  }
+}
+
+query getProductionCountry($id: String!) {
+  getProductionCountry(id: $id) {
+    id
+    createdAt
+    updatedAt
+    iso_3166_1
+    name
+  }
+}

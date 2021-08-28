@@ -1,0 +1,23 @@
+query getSpokenLanguages {
+  getSpokenLanguages {
+    ... on SpokenLanguage {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      name
+      englishName
+    }
+  }
+}
+
+query getSpokenLanguage($id: String!) {
+  getSpokenLanguage(id: $id) {
+    id
+    createdAt
+    updatedAt
+    iso_639_1
+    name
+    englishName
+  }
+}

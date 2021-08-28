@@ -43,7 +43,7 @@ export const movieResolvers = {
         .from(Tables.MOVIES)
         .where({ id })
         .then((dbMovie) => {
-          movie = dbMovie?.[0] ?? {};
+          movie = dbMovie[0];
         });
     } catch (knexError) {
       console.error(knexError);

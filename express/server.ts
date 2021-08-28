@@ -7,6 +7,8 @@ import { resolvers } from '../graphql/resolvers/resolvers';
 import { HTTP_PORT } from '../env';
 import Knex from '../postgres/knex';
 import path from 'path';
+import { typeDefs as scalarTypeDefs, resolvers as scalarResolvers } from 'graphql-scalars';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 
 const corsOptions = {
   origin: `*`,
@@ -15,8 +17,10 @@ const corsOptions = {
 async function startServer() {
   const app = express();
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema: makeExecutableSchema({
+      typeDefs: [...scalarTypeDefs, typeDefs],
+      resolvers: { ...scalarResolvers, ...resolvers },
+    }),
     context: () => ({
       db: Knex,
     }),
@@ -28,7 +32,7 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app, path: `/api/graphql` });
   app.listen({ port: HTTP_PORT }, () => console.log(`App is listening on Port ${HTTP_PORT}`));
-  app.use(express.static(path.resolve(__dirname, `../../html`)));
+  app.use(express.static(path.resolve(__dirname, `../../html`), { extensions: [`html`] }));
 }
 
 try {

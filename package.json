@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.7",
+    "@graphql-tools/schema": "^8.1.2",
     "@hookform/resolvers": "^2.7.1",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -42,6 +43,7 @@
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
+    "graphql-scalars": "^1.10.0",
     "knex": "^0.21.21",
     "morgan": "^1.10.0",
     "next": "11.1.0",
@@ -88,6 +90,7 @@
     "@types/react": "17.0.17",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.3",
     "aws-cdk": "^1.118.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.0.6",

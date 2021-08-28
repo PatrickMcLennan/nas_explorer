@@ -1,0 +1,25 @@
+query getProductionCompanies {
+  getProductionCompanies {
+    ... on ProductionCompany {
+      id
+      name
+      createdAt
+      updatedAt
+      tmdbId
+      logoPath
+      originCountry
+    }
+  }
+}
+
+query getProductionCompany($id: String!) {
+  getProductionCompany(id: $id) {
+    id
+    name
+    createdAt
+    updatedAt
+    tmdbId
+    logoPath
+    originCountry
+  }
+}
