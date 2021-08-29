@@ -1,13 +1,18 @@
-query getProductionCompanies {
-  getProductionCompanies {
-    ... on ProductionCompany {
-      id
-      name
-      createdAt
-      updatedAt
-      tmdbId
-      logoPath
-      originCountry
+query getProductionCompanies($paginationInput: PaginationInput) {
+  getProductionCompanies(paginationInput: $paginationInput) {
+    productionCompanies {
+      ... on ProductionCompany {
+        id
+        name
+        createdAt
+        updatedAt
+        tmdbId
+        logoPath
+        originCountry
+      }
+    }
+    pagination {
+      total
     }
   }
 }

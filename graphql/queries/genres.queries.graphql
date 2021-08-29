@@ -1,11 +1,16 @@
-query getGenres {
-  getGenres {
-    ... on Genre {
-      id
-      createdAt
-      updatedAt
-      tmdbId
-      name
+query getGenres($paginationInput: PaginationInput) {
+  getGenres(paginationInput: $paginationInput) {
+    genres {
+      ... on Genre {
+        id
+        createdAt
+        updatedAt
+        tmdbId
+        name
+      }
+    }
+    pagination {
+      total
     }
   }
 }

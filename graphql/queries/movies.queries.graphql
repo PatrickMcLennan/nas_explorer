@@ -7,40 +7,45 @@ query getDynamoMovies {
   }
 }
 
-query getPostgresMovies {
-  getPostgresMovies {
-    # ... on PostgresMovie {
-    adult
-    backdropPath
-    collection
-    budget
-    createdAt
-    updatedAt
-    fileName
-    genres
-    homepage
-    id
-    tmdbId
-    imdbId
-    originalLanguage
-    originalTitle
-    overview
-    popularity
-    posterPath
-    productionCompanies
-    productionCountries
-    releaseDate
-    revenue
-    runtime
-    spokenLanguages
-    status
-    tagline
-    title
-    trailers
-    video
-    voteAverage
-    voteCount
-    # }
+query getPostgresMovies($paginationInput: PaginationInput) {
+  getPostgresMovies(paginationInput: $paginationInput) {
+    postgresMovies {
+      ... on PostgresMovie {
+        adult
+        backdropPath
+        collection
+        budget
+        createdAt
+        updatedAt
+        fileName
+        genres
+        homepage
+        id
+        tmdbId
+        imdbId
+        originalLanguage
+        originalTitle
+        overview
+        popularity
+        posterPath
+        productionCompanies
+        productionCountries
+        releaseDate
+        revenue
+        runtime
+        spokenLanguages
+        status
+        tagline
+        title
+        trailers
+        video
+        voteAverage
+        voteCount
+      }
+    }
+    pagination {
+      total
+    }
   }
 }
 

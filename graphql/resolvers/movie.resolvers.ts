@@ -1,7 +1,10 @@
 import { awsAxiosClient } from '../../clients/awsAxios.client';
 import * as Knex from 'knex';
 import { Tables } from '../../types/tables.enum';
-import { PostgresMovie, QueryGetPostgresMovieArgs } from '../../types/generated.types';
+import { Pagination, PostgresMovie, QueryGetPostgresMovieArgs } from '../../types/generated.types';
+import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
+import { UserInputError } from 'apollo-server-express';
+import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
 
 export const movieResolvers = {
   getDynamoMovies: async () => {
@@ -19,20 +22,39 @@ export const movieResolvers = {
     return dynamoMovies;
   },
 
-  getPostgresMovies: async (_: any, __: any, { db }: { db: Knex }) => {
-    let movies;
+  getPostgresMovies: async (_: any, { paginationInput }: any, { db }: { db: Knex }) => {
+    let postgresMovies!: PostgresMovie[];
+    let pagination: Pagination = {
+      total: NaN,
+    };
+
+    const offset = paginationInput?.offset;
+    const amount = paginationInput?.amount;
+
+    const { valid, errors, messages } = validatePagination({ offset, amount });
+    if (!valid) {
+      throw new UserInputError(`${errors} errors`, {
+        errors,
+        messages,
+      });
+    }
+
     try {
-      await db
-        .select(`*`)
-        .from(Tables.MOVIES)
-        .then((dbMovies) => {
-          movies = dbMovies;
-        });
+      const [total, dbMovies] = await paginatedDbGET<PostgresMovie>({
+        db,
+        offset,
+        amount,
+        table: Tables.MOVIES,
+      });
+
+      postgresMovies = dbMovies;
+      pagination = repaginate({ paginationInput, total });
     } catch (knexError) {
       console.error(knexError);
-      movies = [];
+      postgresMovies = [];
     }
-    return movies;
+
+    return { postgresMovies, pagination };
   },
 
   getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db }: { db: Knex }) => {

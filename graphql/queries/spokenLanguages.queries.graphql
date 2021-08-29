@@ -1,12 +1,17 @@
-query getSpokenLanguages {
-  getSpokenLanguages {
-    ... on SpokenLanguage {
-      id
-      createdAt
-      updatedAt
-      iso_639_1
-      name
-      englishName
+query getSpokenLanguages($paginationInput: PaginationInput) {
+  getSpokenLanguages(paginationInput: $paginationInput) {
+    spokenLanguages {
+      ... on SpokenLanguage {
+        id
+        createdAt
+        updatedAt
+        iso_639_1
+        name
+        englishName
+      }
+    }
+    pagination {
+      total
     }
   }
 }

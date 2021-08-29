@@ -194,6 +194,48 @@ export type Genre = {
   name: Scalars['String'];
 };
 
+export type GetCollectionsResponse = {
+  __typename?: 'GetCollectionsResponse';
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetGenresResponse = {
+  __typename?: 'GetGenresResponse';
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetMovieTrailersReponse = {
+  __typename?: 'GetMovieTrailersReponse';
+  movieTrailers?: Maybe<Array<Maybe<MovieTrailer>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetPostgresMoviesResponse = {
+  __typename?: 'GetPostgresMoviesResponse';
+  postgresMovies?: Maybe<Array<Maybe<PostgresMovie>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetProductionCompaniesResponse = {
+  __typename?: 'GetProductionCompaniesResponse';
+  productionCompanies?: Maybe<Array<Maybe<ProductionCompany>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetProductionCountriesResponse = {
+  __typename?: 'GetProductionCountriesResponse';
+  productionCountries?: Maybe<Array<Maybe<ProductionCountry>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type GetSpokenLanguageResponse = {
+  __typename?: 'GetSpokenLanguageResponse';
+  spokenLanguages?: Maybe<Array<Maybe<SpokenLanguage>>>;
+  pagination?: Maybe<Pagination>;
+};
+
 
 
 
@@ -242,6 +284,16 @@ export type MovieTrailer = {
 
 
 
+
+export type Pagination = {
+  __typename?: 'Pagination';
+  total: Scalars['Int'];
+};
+
+export type PaginationInput = {
+  offset?: Maybe<Scalars['Int']>;
+  amount?: Maybe<Scalars['Int']>;
+};
 
 
 
@@ -305,26 +357,31 @@ export type ProductionCountry = {
 export type Query = {
   __typename?: 'Query';
   getCollection?: Maybe<Collection>;
-  getCollections?: Maybe<Array<Maybe<Collection>>>;
+  getCollections?: Maybe<GetCollectionsResponse>;
   getImages?: Maybe<Array<Maybe<Image>>>;
   getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
-  getGenres?: Maybe<Array<Maybe<Genre>>>;
   getGenre?: Maybe<Genre>;
+  getGenres?: Maybe<GetGenresResponse>;
   getMovieTrailer?: Maybe<MovieTrailer>;
-  getMovieTrailers?: Maybe<Array<Maybe<MovieTrailer>>>;
-  getPostgresMovies?: Maybe<Array<Maybe<PostgresMovie>>>;
-  getPostgresMovie: PostgresMovie;
+  getMovieTrailers?: Maybe<GetMovieTrailersReponse>;
+  getPostgresMovie?: Maybe<PostgresMovie>;
+  getPostgresMovies?: Maybe<GetPostgresMoviesResponse>;
   getProductionCompany?: Maybe<ProductionCompany>;
-  getProductionCompanies?: Maybe<Array<Maybe<ProductionCompany>>>;
-  getProductionCountries?: Maybe<Array<Maybe<ProductionCountry>>>;
+  getProductionCompanies?: Maybe<GetProductionCompaniesResponse>;
   getProductionCountry?: Maybe<ProductionCountry>;
-  getSpokenLanguages?: Maybe<Array<Maybe<SpokenLanguage>>>;
+  getProductionCountries?: Maybe<GetProductionCountriesResponse>;
   getSpokenLanguage?: Maybe<SpokenLanguage>;
+  getSpokenLanguages?: Maybe<GetSpokenLanguageResponse>;
 };
 
 
 export type QueryGetCollectionArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryGetCollectionsArgs = {
+  paginationInput?: Maybe<PaginationInput>;
 };
 
 
@@ -338,8 +395,18 @@ export type QueryGetGenreArgs = {
 };
 
 
+export type QueryGetGenresArgs = {
+  paginationInput?: Maybe<PaginationInput>;
+};
+
+
 export type QueryGetMovieTrailerArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryGetMovieTrailersArgs = {
+  paginationInput?: Maybe<PaginationInput>;
 };
 
 
@@ -348,8 +415,18 @@ export type QueryGetPostgresMovieArgs = {
 };
 
 
+export type QueryGetPostgresMoviesArgs = {
+  paginationInput?: Maybe<PaginationInput>;
+};
+
+
 export type QueryGetProductionCompanyArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryGetProductionCompaniesArgs = {
+  paginationInput?: Maybe<PaginationInput>;
 };
 
 
@@ -358,8 +435,18 @@ export type QueryGetProductionCountryArgs = {
 };
 
 
+export type QueryGetProductionCountriesArgs = {
+  paginationInput?: Maybe<PaginationInput>;
+};
+
+
 export type QueryGetSpokenLanguageArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryGetSpokenLanguagesArgs = {
+  paginationInput?: Maybe<PaginationInput>;
 };
 
 
@@ -384,10 +471,12 @@ export type SpokenLanguage = {
 
 
 
-export type GetCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCollectionsQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetCollectionsQuery = { __typename?: 'Query', getCollections?: Maybe<Array<Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }>>> };
+export type GetCollectionsQuery = { __typename?: 'Query', getCollections?: Maybe<{ __typename?: 'GetCollectionsResponse', collections?: Maybe<Array<Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetCollectionQueryVariables = Exact<{
   id: Scalars['String'];
@@ -396,10 +485,12 @@ export type GetCollectionQueryVariables = Exact<{
 
 export type GetCollectionQuery = { __typename?: 'Query', getCollection?: Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }> };
 
-export type GetGenresQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetGenresQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetGenresQuery = { __typename?: 'Query', getGenres?: Maybe<Array<Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }>>> };
+export type GetGenresQuery = { __typename?: 'Query', getGenres?: Maybe<{ __typename?: 'GetGenresResponse', genres?: Maybe<Array<Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetGenreQueryVariables = Exact<{
   id: Scalars['String'];
@@ -415,10 +506,12 @@ export type GetImagesQueryVariables = Exact<{
 
 export type GetImagesQuery = { __typename?: 'Query', getImages?: Maybe<Array<Maybe<{ __typename?: 'Image', name: string }>>> };
 
-export type GetMovieTrailersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetMovieTrailersQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }>>> };
+export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<{ __typename?: 'GetMovieTrailersReponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetMovieTrailerQueryVariables = Exact<{
   id: Scalars['String'];
@@ -432,22 +525,26 @@ export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: Maybe<Array<Maybe<{ __typename?: 'DynamoMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };
 
-export type GetPostgresMoviesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPostgresMoviesQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>> };
+export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<{ __typename?: 'GetPostgresMoviesResponse', postgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetPostgresMovieQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie: { __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number } };
+export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie?: Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }> };
 
-export type GetProductionCompaniesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProductionCompaniesQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetProductionCompaniesQuery = { __typename?: 'Query', getProductionCompanies?: Maybe<Array<Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }>>> };
+export type GetProductionCompaniesQuery = { __typename?: 'Query', getProductionCompanies?: Maybe<{ __typename?: 'GetProductionCompaniesResponse', productionCompanies?: Maybe<Array<Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetProductionCompanyQueryVariables = Exact<{
   id: Scalars['String'];
@@ -456,10 +553,12 @@ export type GetProductionCompanyQueryVariables = Exact<{
 
 export type GetProductionCompanyQuery = { __typename?: 'Query', getProductionCompany?: Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }> };
 
-export type GetProductionCountriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetProductionCountriesQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetProductionCountriesQuery = { __typename?: 'Query', getProductionCountries?: Maybe<Array<Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }>>> };
+export type GetProductionCountriesQuery = { __typename?: 'Query', getProductionCountries?: Maybe<{ __typename?: 'GetProductionCountriesResponse', productionCountries?: Maybe<Array<Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetProductionCountryQueryVariables = Exact<{
   id: Scalars['String'];
@@ -468,10 +567,12 @@ export type GetProductionCountryQueryVariables = Exact<{
 
 export type GetProductionCountryQuery = { __typename?: 'Query', getProductionCountry?: Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }> };
 
-export type GetSpokenLanguagesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetSpokenLanguagesQueryVariables = Exact<{
+  paginationInput?: Maybe<PaginationInput>;
+}>;
 
 
-export type GetSpokenLanguagesQuery = { __typename?: 'Query', getSpokenLanguages?: Maybe<Array<Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }>>> };
+export type GetSpokenLanguagesQuery = { __typename?: 'Query', getSpokenLanguages?: Maybe<{ __typename?: 'GetSpokenLanguageResponse', spokenLanguages?: Maybe<Array<Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetSpokenLanguageQueryVariables = Exact<{
   id: Scalars['String'];
@@ -482,18 +583,23 @@ export type GetSpokenLanguageQuery = { __typename?: 'Query', getSpokenLanguage?:
 
 
 export const GetCollectionsDocument = gql`
-    query getCollections {
-  getCollections {
-    ... on Collection {
-      id
-      createdAt
-      updatedAt
-      name
-      tmdbId
-      overview
-      posterPath
-      backdropPath
-      parts
+    query getCollections($paginationInput: PaginationInput) {
+  getCollections(paginationInput: $paginationInput) {
+    collections {
+      ... on Collection {
+        id
+        createdAt
+        updatedAt
+        name
+        tmdbId
+        overview
+        posterPath
+        backdropPath
+        parts
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -511,6 +617,7 @@ export const GetCollectionsDocument = gql`
  * @example
  * const { data, loading, error } = useGetCollectionsQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -569,14 +676,19 @@ export type GetCollectionQueryHookResult = ReturnType<typeof useGetCollectionQue
 export type GetCollectionLazyQueryHookResult = ReturnType<typeof useGetCollectionLazyQuery>;
 export type GetCollectionQueryResult = Apollo.QueryResult<GetCollectionQuery, GetCollectionQueryVariables>;
 export const GetGenresDocument = gql`
-    query getGenres {
-  getGenres {
-    ... on Genre {
-      id
-      createdAt
-      updatedAt
-      tmdbId
-      name
+    query getGenres($paginationInput: PaginationInput) {
+  getGenres(paginationInput: $paginationInput) {
+    genres {
+      ... on Genre {
+        id
+        createdAt
+        updatedAt
+        tmdbId
+        name
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -594,6 +706,7 @@ export const GetGenresDocument = gql`
  * @example
  * const { data, loading, error } = useGetGenresQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -683,22 +796,27 @@ export type GetImagesQueryHookResult = ReturnType<typeof useGetImagesQuery>;
 export type GetImagesLazyQueryHookResult = ReturnType<typeof useGetImagesLazyQuery>;
 export type GetImagesQueryResult = Apollo.QueryResult<GetImagesQuery, GetImagesQueryVariables>;
 export const GetMovieTrailersDocument = gql`
-    query getMovieTrailers {
-  getMovieTrailers {
-    ... on MovieTrailer {
-      id
-      createdAt
-      updatedAt
-      iso_639_1
-      iso_3166_1
-      name
-      key
-      site
-      size
-      type
-      official
-      publishedAt
-      tmdbId
+    query getMovieTrailers($paginationInput: PaginationInput) {
+  getMovieTrailers(paginationInput: $paginationInput) {
+    movieTrailers {
+      ... on MovieTrailer {
+        id
+        createdAt
+        updatedAt
+        iso_639_1
+        iso_3166_1
+        name
+        key
+        site
+        size
+        type
+        official
+        publishedAt
+        tmdbId
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -716,6 +834,7 @@ export const GetMovieTrailersDocument = gql`
  * @example
  * const { data, loading, error } = useGetMovieTrailersQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -815,38 +934,45 @@ export type GetDynamoMoviesQueryHookResult = ReturnType<typeof useGetDynamoMovie
 export type GetDynamoMoviesLazyQueryHookResult = ReturnType<typeof useGetDynamoMoviesLazyQuery>;
 export type GetDynamoMoviesQueryResult = Apollo.QueryResult<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>;
 export const GetPostgresMoviesDocument = gql`
-    query getPostgresMovies {
-  getPostgresMovies {
-    adult
-    backdropPath
-    collection
-    budget
-    createdAt
-    updatedAt
-    fileName
-    genres
-    homepage
-    id
-    tmdbId
-    imdbId
-    originalLanguage
-    originalTitle
-    overview
-    popularity
-    posterPath
-    productionCompanies
-    productionCountries
-    releaseDate
-    revenue
-    runtime
-    spokenLanguages
-    status
-    tagline
-    title
-    trailers
-    video
-    voteAverage
-    voteCount
+    query getPostgresMovies($paginationInput: PaginationInput) {
+  getPostgresMovies(paginationInput: $paginationInput) {
+    postgresMovies {
+      ... on PostgresMovie {
+        adult
+        backdropPath
+        collection
+        budget
+        createdAt
+        updatedAt
+        fileName
+        genres
+        homepage
+        id
+        tmdbId
+        imdbId
+        originalLanguage
+        originalTitle
+        overview
+        popularity
+        posterPath
+        productionCompanies
+        productionCountries
+        releaseDate
+        revenue
+        runtime
+        spokenLanguages
+        status
+        tagline
+        title
+        trailers
+        video
+        voteAverage
+        voteCount
+      }
+    }
+    pagination {
+      total
+    }
   }
 }
     `;
@@ -863,6 +989,7 @@ export const GetPostgresMoviesDocument = gql`
  * @example
  * const { data, loading, error } = useGetPostgresMoviesQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -942,16 +1069,21 @@ export type GetPostgresMovieQueryHookResult = ReturnType<typeof useGetPostgresMo
 export type GetPostgresMovieLazyQueryHookResult = ReturnType<typeof useGetPostgresMovieLazyQuery>;
 export type GetPostgresMovieQueryResult = Apollo.QueryResult<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>;
 export const GetProductionCompaniesDocument = gql`
-    query getProductionCompanies {
-  getProductionCompanies {
-    ... on ProductionCompany {
-      id
-      name
-      createdAt
-      updatedAt
-      tmdbId
-      logoPath
-      originCountry
+    query getProductionCompanies($paginationInput: PaginationInput) {
+  getProductionCompanies(paginationInput: $paginationInput) {
+    productionCompanies {
+      ... on ProductionCompany {
+        id
+        name
+        createdAt
+        updatedAt
+        tmdbId
+        logoPath
+        originCountry
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -969,6 +1101,7 @@ export const GetProductionCompaniesDocument = gql`
  * @example
  * const { data, loading, error } = useGetProductionCompaniesQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -1025,14 +1158,19 @@ export type GetProductionCompanyQueryHookResult = ReturnType<typeof useGetProduc
 export type GetProductionCompanyLazyQueryHookResult = ReturnType<typeof useGetProductionCompanyLazyQuery>;
 export type GetProductionCompanyQueryResult = Apollo.QueryResult<GetProductionCompanyQuery, GetProductionCompanyQueryVariables>;
 export const GetProductionCountriesDocument = gql`
-    query getProductionCountries {
-  getProductionCountries {
-    ... on ProductionCountry {
-      id
-      createdAt
-      updatedAt
-      iso_3166_1
-      name
+    query getProductionCountries($paginationInput: PaginationInput) {
+  getProductionCountries(paginationInput: $paginationInput) {
+    productionCountries {
+      ... on ProductionCountry {
+        id
+        createdAt
+        updatedAt
+        iso_3166_1
+        name
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -1050,6 +1188,7 @@ export const GetProductionCountriesDocument = gql`
  * @example
  * const { data, loading, error } = useGetProductionCountriesQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */
@@ -1104,15 +1243,20 @@ export type GetProductionCountryQueryHookResult = ReturnType<typeof useGetProduc
 export type GetProductionCountryLazyQueryHookResult = ReturnType<typeof useGetProductionCountryLazyQuery>;
 export type GetProductionCountryQueryResult = Apollo.QueryResult<GetProductionCountryQuery, GetProductionCountryQueryVariables>;
 export const GetSpokenLanguagesDocument = gql`
-    query getSpokenLanguages {
-  getSpokenLanguages {
-    ... on SpokenLanguage {
-      id
-      createdAt
-      updatedAt
-      iso_639_1
-      name
-      englishName
+    query getSpokenLanguages($paginationInput: PaginationInput) {
+  getSpokenLanguages(paginationInput: $paginationInput) {
+    spokenLanguages {
+      ... on SpokenLanguage {
+        id
+        createdAt
+        updatedAt
+        iso_639_1
+        name
+        englishName
+      }
+    }
+    pagination {
+      total
     }
   }
 }
@@ -1130,6 +1274,7 @@ export const GetSpokenLanguagesDocument = gql`
  * @example
  * const { data, loading, error } = useGetSpokenLanguagesQuery({
  *   variables: {
+ *      paginationInput: // value for 'paginationInput'
  *   },
  * });
  */

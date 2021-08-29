@@ -1,19 +1,24 @@
-query getMovieTrailers {
-  getMovieTrailers {
-    ... on MovieTrailer {
-      id
-      createdAt
-      updatedAt
-      iso_639_1
-      iso_3166_1
-      name
-      key
-      site
-      size
-      type
-      official
-      publishedAt
-      tmdbId
+query getMovieTrailers($paginationInput: PaginationInput) {
+  getMovieTrailers(paginationInput: $paginationInput) {
+    movieTrailers {
+      ... on MovieTrailer {
+        id
+        createdAt
+        updatedAt
+        iso_639_1
+        iso_3166_1
+        name
+        key
+        site
+        size
+        type
+        official
+        publishedAt
+        tmdbId
+      }
+    }
+    pagination {
+      total
     }
   }
 }

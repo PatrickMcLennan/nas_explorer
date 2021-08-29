@@ -2,7 +2,11 @@ import * as Knex from 'knex';
 import { Tables } from '../../types/tables.enum';
 
 export const productionCompanyResolvers = {
-  getProductionCompanies: async (_: any, __: any, { db }: { db: Knex }) => {
+  getProductionCompanies: async (
+    _: any,
+    { paginationInput }: any,
+    { db }: { db: Knex }
+  ): Promise<GetGenresResponse> => {
     let productionCompanies;
 
     try {

@@ -1,6 +1,15 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
+  type Pagination {
+    total: Int!
+  }
+
+  input PaginationInput {
+    offset: Int
+    amount: Int
+  }
+
   type Collection {
     id: String!
     createdAt: Timestamp!
@@ -11,6 +20,11 @@ export const typeDefs = gql`
     posterPath: String
     backdropPath: String
     parts: [String]!
+  }
+
+  type GetCollectionsResponse {
+    collections: [Collection]
+    pagination: Pagination
   }
 
   type DynamoMovie {
@@ -32,6 +46,16 @@ export const typeDefs = gql`
     name: String!
   }
 
+  type GetGenresResponse {
+    genres: [Genre]
+    pagination: Pagination
+  }
+
+  type GetGenresResponse {
+    genres: [Genre]
+    pagination: Pagination
+  }
+
   type MovieTrailer {
     id: String!
     createdAt: String!
@@ -46,6 +70,11 @@ export const typeDefs = gql`
     official: Boolean
     publishedAt: Timestamp
     tmdbId: String!
+  }
+
+  type GetMovieTrailersReponse {
+    movieTrailers: [MovieTrailer]
+    pagination: Pagination
   }
 
   type PostgresMovie {
@@ -81,6 +110,11 @@ export const typeDefs = gql`
     voteCount: Int!
   }
 
+  type GetPostgresMoviesResponse {
+    postgresMovies: [PostgresMovie]
+    pagination: Pagination
+  }
+
   type ProductionCompany {
     id: String!
     createdAt: Timestamp!
@@ -91,12 +125,22 @@ export const typeDefs = gql`
     originCountry: String!
   }
 
+  type GetProductionCompaniesResponse {
+    productionCompanies: [ProductionCompany]
+    pagination: Pagination
+  }
+
   type ProductionCountry {
     id: String!
     createdAt: Timestamp!
     updatedAt: Timestamp!
     iso_3166_1: String!
     name: String!
+  }
+
+  type GetProductionCountriesResponse {
+    productionCountries: [ProductionCountry]
+    pagination: Pagination
   }
 
   type SpokenLanguage {
@@ -108,22 +152,35 @@ export const typeDefs = gql`
     englishName: String
   }
 
+  type GetSpokenLanguageResponse {
+    spokenLanguages: [SpokenLanguage]
+    pagination: Pagination
+  }
+
   type Query {
     getCollection(id: String!): Collection
-    getCollections: [Collection]
+    getCollections(paginationInput: PaginationInput): GetCollectionsResponse
+
     getImages(page: Int!): [Image]
+
     getDynamoMovies: [DynamoMovie]
-    getGenres: [Genre]
+
     getGenre(id: String!): Genre
+    getGenres(paginationInput: PaginationInput): GetGenresResponse
+
     getMovieTrailer(id: String!): MovieTrailer
-    getMovieTrailers: [MovieTrailer]
-    getPostgresMovies: [PostgresMovie]
-    getPostgresMovie(id: String!): PostgresMovie!
+    getMovieTrailers(paginationInput: PaginationInput): GetMovieTrailersReponse
+
+    getPostgresMovie(id: String!): PostgresMovie
+    getPostgresMovies(paginationInput: PaginationInput): GetPostgresMoviesResponse
+
     getProductionCompany(id: String!): ProductionCompany
-    getProductionCompanies: [ProductionCompany]
-    getProductionCountries: [ProductionCountry]
+    getProductionCompanies(paginationInput: PaginationInput): GetProductionCompaniesResponse
+
     getProductionCountry(id: String!): ProductionCountry
-    getSpokenLanguages: [SpokenLanguage]
+    getProductionCountries(paginationInput: PaginationInput): GetProductionCountriesResponse
+
     getSpokenLanguage(id: String!): SpokenLanguage
+    getSpokenLanguages(paginationInput: PaginationInput): GetSpokenLanguageResponse
   }
 `;

@@ -1,11 +1,16 @@
-query getProductionCountries {
-  getProductionCountries {
-    ... on ProductionCountry {
-      id
-      createdAt
-      updatedAt
-      iso_3166_1
-      name
+query getProductionCountries($paginationInput: PaginationInput) {
+  getProductionCountries(paginationInput: $paginationInput) {
+    productionCountries {
+      ... on ProductionCountry {
+        id
+        createdAt
+        updatedAt
+        iso_3166_1
+        name
+      }
+    }
+    pagination {
+      total
     }
   }
 }
