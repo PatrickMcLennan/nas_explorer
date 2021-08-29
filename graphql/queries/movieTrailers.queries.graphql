@@ -15,6 +15,7 @@ query getMovieTrailers($paginationInput: PaginationInput) {
         official
         publishedAt
         tmdbId
+        movieId
       }
     }
     pagination {
@@ -38,5 +39,30 @@ query getMovieTrailer($id: String!) {
     official
     publishedAt
     tmdbId
+    movieId
+  }
+}
+
+query searchMovieTrailersByKeyValue($searchInput: SearchInput) {
+  searchMovieTrailersByKeyValue(searchInput: $searchInput) {
+    movieTrailers {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      iso_3166_1
+      name
+      key
+      site
+      size
+      type
+      official
+      publishedAt
+      tmdbId
+      movieId
+    }
+    pagination {
+      total
+    }
   }
 }

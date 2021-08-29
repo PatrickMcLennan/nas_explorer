@@ -39,6 +39,7 @@
     "apollo-server-express": "^3.1.2",
     "aws-sdk": "^2.968.0",
     "axios": "^0.21.1",
+    "clsx": "^1.1.1",
     "express": "^4.17.1",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
@@ -52,8 +53,12 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.12.2",
+    "react-player": "^2.9.0",
+    "react-slick": "^0.28.1",
+    "slick-carousel": "^1.8.1",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "zustand": "^3.5.10"
   },
   "resolutions": {
     "graphql": "15.5.1",
@@ -88,6 +93,7 @@
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.6.1",
     "@types/react": "17.0.17",
+    "@types/react-slick": "^0.23.5",
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.3",

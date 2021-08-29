@@ -20,6 +20,7 @@ export async function up(knex: Knex): Promise<void> {
         table.boolean(`official`);
         table.timestamp(`publishedAt`);
         table.string(`tmdbId`);
+        table.string(`movieId`, 36).notNullable();
       })
       .then();
   }

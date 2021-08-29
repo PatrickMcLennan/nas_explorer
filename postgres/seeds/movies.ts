@@ -102,6 +102,8 @@ export async function seed(knex: Knex): Promise<void> {
           return all;
         }
 
+        const movieUuid = uuidv4();
+
         let genres;
 
         try {
@@ -229,6 +231,7 @@ export async function seed(knex: Knex): Promise<void> {
                 id: uuid,
                 tmdbId: id,
                 publishedAt: currentTrailer.published_at,
+                movieId: movieUuid,
               };
               delete newTrailer.published_at;
               allTrailers.push(newTrailer);
@@ -252,7 +255,7 @@ export async function seed(knex: Knex): Promise<void> {
             fileName: current.fileName,
             genres: genres?.map?.((genre: Genre) => genresMap.get(genre?.tmdbId)),
             homepage: current.homepage,
-            id: uuidv4(),
+            id: movieUuid,
             imdbId: current.imdbId,
             originalLanguage: current.original_language,
             originalTitle: current.original_title,

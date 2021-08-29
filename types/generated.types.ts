@@ -272,6 +272,7 @@ export type MovieTrailer = {
   official?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['Timestamp']>;
   tmdbId: Scalars['String'];
+  movieId: Scalars['String'];
 };
 
 
@@ -355,20 +356,27 @@ export type Query = {
   __typename?: 'Query';
   getCollection?: Maybe<Collection>;
   getCollections?: Maybe<GetCollectionsResponse>;
+  searchCollectionsByKeyValue?: Maybe<SearchCollectionsResponse>;
   getImages?: Maybe<Array<Maybe<Image>>>;
   getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
   getGenre?: Maybe<Genre>;
   getGenres?: Maybe<GetGenresResponse>;
+  searchGenresByKeyValue?: Maybe<SearchGenresResponse>;
   getMovieTrailer?: Maybe<MovieTrailer>;
   getMovieTrailers?: Maybe<GetMovieTrailersReponse>;
+  searchMovieTrailersByKeyValue?: Maybe<SearchMovieTrailersResponse>;
   getPostgresMovie?: Maybe<PostgresMovie>;
   getPostgresMovies?: Maybe<GetPostgresMoviesResponse>;
+  searchPostgresMoviesByKeyValue?: Maybe<SearchPostgresMoviesResponse>;
   getProductionCompany?: Maybe<ProductionCompany>;
   getProductionCompanies?: Maybe<GetProductionCompaniesResponse>;
+  searchProductionCompaniesByKeyValue?: Maybe<SearchProductionCompaniesResponse>;
   getProductionCountry?: Maybe<ProductionCountry>;
   getProductionCountries?: Maybe<GetProductionCountriesResponse>;
+  searchProductionCountriesByKeyValue?: Maybe<SearchProductionCountriesResponse>;
   getSpokenLanguage?: Maybe<SpokenLanguage>;
   getSpokenLanguages?: Maybe<GetSpokenLanguageResponse>;
+  searchSpokenLanguagesByKeyValue?: Maybe<SearchSpokenLanguagesResponse>;
 };
 
 
@@ -379,6 +387,11 @@ export type QueryGetCollectionArgs = {
 
 export type QueryGetCollectionsArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchCollectionsByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -397,6 +410,11 @@ export type QueryGetGenresArgs = {
 };
 
 
+export type QuerySearchGenresByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetMovieTrailerArgs = {
   id: Scalars['String'];
 };
@@ -404,6 +422,11 @@ export type QueryGetMovieTrailerArgs = {
 
 export type QueryGetMovieTrailersArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchMovieTrailersByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -417,6 +440,11 @@ export type QueryGetPostgresMoviesArgs = {
 };
 
 
+export type QuerySearchPostgresMoviesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetProductionCompanyArgs = {
   id: Scalars['String'];
 };
@@ -424,6 +452,11 @@ export type QueryGetProductionCompanyArgs = {
 
 export type QueryGetProductionCompaniesArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchProductionCompaniesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -437,6 +470,11 @@ export type QueryGetProductionCountriesArgs = {
 };
 
 
+export type QuerySearchProductionCountriesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetSpokenLanguageArgs = {
   id: Scalars['String'];
 };
@@ -447,7 +485,60 @@ export type QueryGetSpokenLanguagesArgs = {
 };
 
 
+export type QuerySearchSpokenLanguagesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
 
+
+
+
+export type SearchCollectionsResponse = {
+  __typename?: 'SearchCollectionsResponse';
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchGenresResponse = {
+  __typename?: 'SearchGenresResponse';
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchInput = {
+  searchKey?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  paginationInput?: Maybe<PaginationInput>;
+};
+
+export type SearchMovieTrailersResponse = {
+  __typename?: 'SearchMovieTrailersResponse';
+  movieTrailers?: Maybe<Array<Maybe<MovieTrailer>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchPostgresMoviesResponse = {
+  __typename?: 'SearchPostgresMoviesResponse';
+  postgresMovies?: Maybe<Array<Maybe<PostgresMovie>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchProductionCompaniesResponse = {
+  __typename?: 'SearchProductionCompaniesResponse';
+  productionCompanies?: Maybe<Array<Maybe<ProductionCompany>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchProductionCountriesResponse = {
+  __typename?: 'SearchProductionCountriesResponse';
+  productionCountries?: Maybe<Array<Maybe<ProductionCountry>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchSpokenLanguagesResponse = {
+  __typename?: 'SearchSpokenLanguagesResponse';
+  spokenLanguages?: Maybe<Array<Maybe<SpokenLanguage>>>;
+  pagination?: Maybe<Pagination>;
+};
 
 export type SpokenLanguage = {
   __typename?: 'SpokenLanguage';
@@ -482,6 +573,13 @@ export type GetCollectionQueryVariables = Exact<{
 
 export type GetCollectionQuery = { __typename?: 'Query', getCollection?: Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }> };
 
+export type SearchCollectionsByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchCollectionsByKeyValueQuery = { __typename?: 'Query', searchCollectionsByKeyValue?: Maybe<{ __typename?: 'SearchCollectionsResponse', collections?: Maybe<Array<Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetGenresQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -496,6 +594,13 @@ export type GetGenreQueryVariables = Exact<{
 
 export type GetGenreQuery = { __typename?: 'Query', getGenre?: Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }> };
 
+export type SearchGenresByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchGenresByKeyValueQuery = { __typename?: 'Query', searchGenresByKeyValue?: Maybe<{ __typename?: 'SearchGenresResponse', genres?: Maybe<Array<Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetImagesQueryVariables = Exact<{
   page: Scalars['Int'];
 }>;
@@ -508,19 +613,33 @@ export type GetMovieTrailersQueryVariables = Exact<{
 }>;
 
 
-export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<{ __typename?: 'GetMovieTrailersReponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<{ __typename?: 'GetMovieTrailersReponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetMovieTrailerQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMovieTrailerQuery = { __typename?: 'Query', getMovieTrailer?: Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }> };
+export type GetMovieTrailerQuery = { __typename?: 'Query', getMovieTrailer?: Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }> };
+
+export type SearchMovieTrailersByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchMovieTrailersByKeyValueQuery = { __typename?: 'Query', searchMovieTrailersByKeyValue?: Maybe<{ __typename?: 'SearchMovieTrailersResponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: Maybe<Array<Maybe<{ __typename?: 'DynamoMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };
+
+export type GetPostgresMovieQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie?: Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }> };
 
 export type GetPostgresMoviesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
@@ -529,12 +648,12 @@ export type GetPostgresMoviesQueryVariables = Exact<{
 
 export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<{ __typename?: 'GetPostgresMoviesResponse', postgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
-export type GetPostgresMovieQueryVariables = Exact<{
-  id: Scalars['String'];
+export type SearchPostgresMoviesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
 }>;
 
 
-export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie?: Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }> };
+export type SearchPostgresMoviesByKeyValueQuery = { __typename?: 'Query', searchPostgresMoviesByKeyValue?: Maybe<{ __typename?: 'SearchPostgresMoviesResponse', postgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetProductionCompaniesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
@@ -550,6 +669,13 @@ export type GetProductionCompanyQueryVariables = Exact<{
 
 export type GetProductionCompanyQuery = { __typename?: 'Query', getProductionCompany?: Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }> };
 
+export type SearchProductionCompaniesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchProductionCompaniesByKeyValueQuery = { __typename?: 'Query', searchProductionCompaniesByKeyValue?: Maybe<{ __typename?: 'SearchProductionCompaniesResponse', productionCompanies?: Maybe<Array<Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetProductionCountriesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -564,6 +690,13 @@ export type GetProductionCountryQueryVariables = Exact<{
 
 export type GetProductionCountryQuery = { __typename?: 'Query', getProductionCountry?: Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }> };
 
+export type SearchProductionCountriesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchProductionCountriesByKeyValueQuery = { __typename?: 'Query', searchProductionCountriesByKeyValue?: Maybe<{ __typename?: 'SearchProductionCountriesResponse', productionCountries?: Maybe<Array<Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetSpokenLanguagesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -577,3 +710,10 @@ export type GetSpokenLanguageQueryVariables = Exact<{
 
 
 export type GetSpokenLanguageQuery = { __typename?: 'Query', getSpokenLanguage?: Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }> };
+
+export type SearchSpokenLanguagesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchSpokenLanguagesByKeyValueQuery = { __typename?: 'Query', searchSpokenLanguagesByKeyValue?: Maybe<{ __typename?: 'SearchSpokenLanguagesResponse', spokenLanguages?: Maybe<Array<Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };

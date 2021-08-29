@@ -1,4 +1,5 @@
 import { collectionResolvers } from './collections.resolvers';
+import { genresResolvers } from './genres.resolvers';
 import { imageResolvers } from './image.resolvers';
 import { movieResolvers } from './movie.resolvers';
 import { movieTrailerResolvers } from './movieTrailers.resolvers';
@@ -10,6 +11,7 @@ export const resolvers = {
   Query: {
     ...collectionResolvers,
     ...imageResolvers,
+    ...genresResolvers,
     ...movieResolvers,
     ...movieTrailerResolvers,
     ...productionCompanyResolvers,

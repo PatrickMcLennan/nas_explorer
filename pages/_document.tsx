@@ -1,26 +1,21 @@
 import React from 'react';
-import NextDocument from 'next/document';
-import { ServerStyleSheets as MaterialUiComponentSheets } from '@material-ui/core/styles';
+import Document from 'next/document';
+import { ServerStyleSheets } from '@material-ui/core/styles';
 
-export default class Document extends NextDocument {
+export default class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
-    const materialUiSheet = new MaterialUiComponentSheets();
+    const sheets = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
 
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: (App: any) => (props: any) => materialUiSheet.collect(<App {...props} />),
+        enhanceApp: (App: any) => (props: any) => sheets.collect(<App {...props} />),
       });
-    const initialProps = await NextDocument.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx);
 
     return {
       ...initialProps,
-      styles: [
-        <React.Fragment key="styles">
-          {initialProps.styles}
-          {materialUiSheet.getStyleElement()}
-        </React.Fragment>,
-      ],
+      styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
     };
   }
 }

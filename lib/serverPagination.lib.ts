@@ -1,6 +1,7 @@
-import { Pagination, PaginationInput } from '../types/generated.types';
+import { PaginationInput } from '../types/generated.types';
+import { ServerValidation } from '../types/serverValidation.types';
 
-export const validatePagination = ({ offset, amount }: PaginationInput) => {
+export const validatePagination = ({ offset, amount }: PaginationInput): ServerValidation => {
   let valid = true;
   let errors = 0;
   let messages = [];
@@ -28,7 +29,13 @@ export const validatePagination = ({ offset, amount }: PaginationInput) => {
   };
 };
 
-export const repaginate = ({ paginationInput, total }: { paginationInput: Pagination; total: { count: number } }) => ({
+export const repaginate = ({
+  paginationInput,
+  total,
+}: {
+  paginationInput: PaginationInput;
+  total: { count: number };
+}) => ({
   ...paginationInput,
   total: Number(total?.count ?? NaN),
 });

@@ -7,6 +7,41 @@ query getDynamoMovies {
   }
 }
 
+query getPostgresMovie($id: String!) {
+  getPostgresMovie(id: $id) {
+    adult
+    backdropPath
+    collection
+    budget
+    createdAt
+    updatedAt
+    fileName
+    genres
+    homepage
+    id
+    tmdbId
+    imdbId
+    originalLanguage
+    originalTitle
+    overview
+    popularity
+    posterPath
+    productionCompanies
+    productionCountries
+    releaseDate
+    revenue
+    runtime
+    spokenLanguages
+    status
+    tagline
+    title
+    trailers
+    video
+    voteAverage
+    voteCount
+  }
+}
+
 query getPostgresMovies($paginationInput: PaginationInput) {
   getPostgresMovies(paginationInput: $paginationInput) {
     postgresMovies {
@@ -48,38 +83,44 @@ query getPostgresMovies($paginationInput: PaginationInput) {
     }
   }
 }
-
-query getPostgresMovie($id: String!) {
-  getPostgresMovie(id: $id) {
-    adult
-    backdropPath
-    collection
-    budget
-    createdAt
-    updatedAt
-    fileName
-    genres
-    homepage
-    id
-    tmdbId
-    imdbId
-    originalLanguage
-    originalTitle
-    overview
-    popularity
-    posterPath
-    productionCompanies
-    productionCountries
-    releaseDate
-    revenue
-    runtime
-    spokenLanguages
-    status
-    tagline
-    title
-    trailers
-    video
-    voteAverage
-    voteCount
+query searchPostgresMoviesByKeyValue($searchInput: SearchInput) {
+  searchPostgresMoviesByKeyValue(searchInput: $searchInput) {
+    postgresMovies {
+      ... on PostgresMovie {
+        adult
+        backdropPath
+        collection
+        budget
+        createdAt
+        updatedAt
+        fileName
+        genres
+        homepage
+        id
+        tmdbId
+        imdbId
+        originalLanguage
+        originalTitle
+        overview
+        popularity
+        posterPath
+        productionCompanies
+        productionCountries
+        releaseDate
+        revenue
+        runtime
+        spokenLanguages
+        status
+        tagline
+        title
+        trailers
+        video
+        voteAverage
+        voteCount
+      }
+    }
+    pagination {
+      total
+    }
   }
 }

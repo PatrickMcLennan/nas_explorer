@@ -24,3 +24,18 @@ query getGenre($id: String!) {
     name
   }
 }
+
+query searchGenresByKeyValue($searchInput: SearchInput) {
+  searchGenresByKeyValue(searchInput: $searchInput) {
+    genres {
+      id
+      createdAt
+      updatedAt
+      tmdbId
+      name
+    }
+    pagination {
+      total
+    }
+  }
+}

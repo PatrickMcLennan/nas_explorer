@@ -1,6 +1,12 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
+  input SearchInput {
+    searchKey: String
+    value: String
+    paginationInput: PaginationInput
+  }
+
   type Pagination {
     total: Int!
   }
@@ -23,6 +29,11 @@ export const typeDefs = gql`
   }
 
   type GetCollectionsResponse {
+    collections: [Collection]
+    pagination: Pagination
+  }
+
+  type SearchCollectionsResponse {
     collections: [Collection]
     pagination: Pagination
   }
@@ -51,7 +62,7 @@ export const typeDefs = gql`
     pagination: Pagination
   }
 
-  type GetGenresResponse {
+  type SearchGenresResponse {
     genres: [Genre]
     pagination: Pagination
   }
@@ -70,9 +81,15 @@ export const typeDefs = gql`
     official: Boolean
     publishedAt: Timestamp
     tmdbId: String!
+    movieId: String!
   }
 
   type GetMovieTrailersReponse {
+    movieTrailers: [MovieTrailer]
+    pagination: Pagination
+  }
+
+  type SearchMovieTrailersResponse {
     movieTrailers: [MovieTrailer]
     pagination: Pagination
   }
@@ -115,6 +132,11 @@ export const typeDefs = gql`
     pagination: Pagination
   }
 
+  type SearchPostgresMoviesResponse {
+    postgresMovies: [PostgresMovie]
+    pagination: Pagination
+  }
+
   type ProductionCompany {
     id: String!
     createdAt: Timestamp!
@@ -130,6 +152,11 @@ export const typeDefs = gql`
     pagination: Pagination
   }
 
+  type SearchProductionCompaniesResponse {
+    productionCompanies: [ProductionCompany]
+    pagination: Pagination
+  }
+
   type ProductionCountry {
     id: String!
     createdAt: Timestamp!
@@ -139,6 +166,11 @@ export const typeDefs = gql`
   }
 
   type GetProductionCountriesResponse {
+    productionCountries: [ProductionCountry]
+    pagination: Pagination
+  }
+
+  type SearchProductionCountriesResponse {
     productionCountries: [ProductionCountry]
     pagination: Pagination
   }
@@ -157,9 +189,15 @@ export const typeDefs = gql`
     pagination: Pagination
   }
 
+  type SearchSpokenLanguagesResponse {
+    spokenLanguages: [SpokenLanguage]
+    pagination: Pagination
+  }
+
   type Query {
     getCollection(id: String!): Collection
     getCollections(paginationInput: PaginationInput): GetCollectionsResponse
+    searchCollectionsByKeyValue(searchInput: SearchInput): SearchCollectionsResponse
 
     getImages(page: Int!): [Image]
 
@@ -167,20 +205,26 @@ export const typeDefs = gql`
 
     getGenre(id: String!): Genre
     getGenres(paginationInput: PaginationInput): GetGenresResponse
+    searchGenresByKeyValue(searchInput: SearchInput): SearchGenresResponse
 
     getMovieTrailer(id: String!): MovieTrailer
     getMovieTrailers(paginationInput: PaginationInput): GetMovieTrailersReponse
+    searchMovieTrailersByKeyValue(searchInput: SearchInput): SearchMovieTrailersResponse
 
     getPostgresMovie(id: String!): PostgresMovie
     getPostgresMovies(paginationInput: PaginationInput): GetPostgresMoviesResponse
+    searchPostgresMoviesByKeyValue(searchInput: SearchInput): SearchPostgresMoviesResponse
 
     getProductionCompany(id: String!): ProductionCompany
     getProductionCompanies(paginationInput: PaginationInput): GetProductionCompaniesResponse
+    searchProductionCompaniesByKeyValue(searchInput: SearchInput): SearchProductionCompaniesResponse
 
     getProductionCountry(id: String!): ProductionCountry
     getProductionCountries(paginationInput: PaginationInput): GetProductionCountriesResponse
+    searchProductionCountriesByKeyValue(searchInput: SearchInput): SearchProductionCountriesResponse
 
     getSpokenLanguage(id: String!): SpokenLanguage
     getSpokenLanguages(paginationInput: PaginationInput): GetSpokenLanguageResponse
+    searchSpokenLanguagesByKeyValue(searchInput: SearchInput): SearchSpokenLanguagesResponse
   }
 `;

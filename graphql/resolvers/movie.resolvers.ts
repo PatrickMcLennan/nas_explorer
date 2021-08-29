@@ -5,6 +5,9 @@ import { Pagination, PostgresMovie, QueryGetPostgresMovieArgs } from '../../type
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
 import { UserInputError } from 'apollo-server-express';
 import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
+import { validateSearchParams } from '../../lib/serverSearch';
+import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
+import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
 
 export const movieResolvers = {
   getDynamoMovies: async () => {
@@ -73,5 +76,48 @@ export const movieResolvers = {
     }
     console.log(movie);
     return movie;
+  },
+
+  searchPostgresMoviesByKeyValue: async (_: any, { searchInput }: { searchInput: any }, { db }: { db: Knex }) => {
+    let postgresMovies: PostgresMovie[];
+    let pagination: Pagination = {
+      total: NaN,
+    };
+
+    const paginationInput = searchInput?.paginationInput;
+    const offset = paginationInput?.offset ?? NaN;
+    const amount = paginationInput?.amount ?? NaN;
+    const searchKey = searchInput?.searchKey;
+    const value = searchInput?.value;
+
+    const validPagination = validatePagination({ offset, amount });
+    const validSearchParams = await validateSearchParams({ searchInput, db, table: Tables.MOVIES });
+
+    const { valid, errors, messages } = serverErrorReducer([validPagination, validSearchParams]);
+
+    if (!valid) {
+      throw new UserInputError(`${errors} errors`, {
+        errors,
+        messages,
+      });
+    }
+
+    try {
+      const [total, dbPostgresMovies] = await paginatedDbSEARCH<PostgresMovie>({
+        db,
+        offset,
+        amount,
+        table: Tables.MOVIES,
+        searchKey,
+        value,
+      });
+      postgresMovies = dbPostgresMovies;
+      pagination = repaginate({ paginationInput, total });
+    } catch (knexError) {
+      console.error(knexError);
+      postgresMovies = [];
+    }
+
+    return { postgresMovies, pagination };
   },
 };

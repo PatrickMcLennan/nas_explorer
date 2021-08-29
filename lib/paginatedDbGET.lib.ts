@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const paginatedDbGET = async <T>({ db, offset, amount, table }: Props): Promise<[{ count: number }, T[]]> => {
-  let get;
+  let get: any;
 
   if (!Number.isNaN(offset) && !Number.isNaN(amount)) {
     get = await Promise.all([

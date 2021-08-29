@@ -275,6 +275,7 @@ export type MovieTrailer = {
   official?: Maybe<Scalars['Boolean']>;
   publishedAt?: Maybe<Scalars['Timestamp']>;
   tmdbId: Scalars['String'];
+  movieId: Scalars['String'];
 };
 
 
@@ -358,20 +359,27 @@ export type Query = {
   __typename?: 'Query';
   getCollection?: Maybe<Collection>;
   getCollections?: Maybe<GetCollectionsResponse>;
+  searchCollectionsByKeyValue?: Maybe<SearchCollectionsResponse>;
   getImages?: Maybe<Array<Maybe<Image>>>;
   getDynamoMovies?: Maybe<Array<Maybe<DynamoMovie>>>;
   getGenre?: Maybe<Genre>;
   getGenres?: Maybe<GetGenresResponse>;
+  searchGenresByKeyValue?: Maybe<SearchGenresResponse>;
   getMovieTrailer?: Maybe<MovieTrailer>;
   getMovieTrailers?: Maybe<GetMovieTrailersReponse>;
+  searchMovieTrailersByKeyValue?: Maybe<SearchMovieTrailersResponse>;
   getPostgresMovie?: Maybe<PostgresMovie>;
   getPostgresMovies?: Maybe<GetPostgresMoviesResponse>;
+  searchPostgresMoviesByKeyValue?: Maybe<SearchPostgresMoviesResponse>;
   getProductionCompany?: Maybe<ProductionCompany>;
   getProductionCompanies?: Maybe<GetProductionCompaniesResponse>;
+  searchProductionCompaniesByKeyValue?: Maybe<SearchProductionCompaniesResponse>;
   getProductionCountry?: Maybe<ProductionCountry>;
   getProductionCountries?: Maybe<GetProductionCountriesResponse>;
+  searchProductionCountriesByKeyValue?: Maybe<SearchProductionCountriesResponse>;
   getSpokenLanguage?: Maybe<SpokenLanguage>;
   getSpokenLanguages?: Maybe<GetSpokenLanguageResponse>;
+  searchSpokenLanguagesByKeyValue?: Maybe<SearchSpokenLanguagesResponse>;
 };
 
 
@@ -382,6 +390,11 @@ export type QueryGetCollectionArgs = {
 
 export type QueryGetCollectionsArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchCollectionsByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -400,6 +413,11 @@ export type QueryGetGenresArgs = {
 };
 
 
+export type QuerySearchGenresByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetMovieTrailerArgs = {
   id: Scalars['String'];
 };
@@ -407,6 +425,11 @@ export type QueryGetMovieTrailerArgs = {
 
 export type QueryGetMovieTrailersArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchMovieTrailersByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -420,6 +443,11 @@ export type QueryGetPostgresMoviesArgs = {
 };
 
 
+export type QuerySearchPostgresMoviesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetProductionCompanyArgs = {
   id: Scalars['String'];
 };
@@ -427,6 +455,11 @@ export type QueryGetProductionCompanyArgs = {
 
 export type QueryGetProductionCompaniesArgs = {
   paginationInput?: Maybe<PaginationInput>;
+};
+
+
+export type QuerySearchProductionCompaniesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
 };
 
 
@@ -440,6 +473,11 @@ export type QueryGetProductionCountriesArgs = {
 };
 
 
+export type QuerySearchProductionCountriesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
+
+
 export type QueryGetSpokenLanguageArgs = {
   id: Scalars['String'];
 };
@@ -450,7 +488,60 @@ export type QueryGetSpokenLanguagesArgs = {
 };
 
 
+export type QuerySearchSpokenLanguagesByKeyValueArgs = {
+  searchInput?: Maybe<SearchInput>;
+};
 
+
+
+
+export type SearchCollectionsResponse = {
+  __typename?: 'SearchCollectionsResponse';
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchGenresResponse = {
+  __typename?: 'SearchGenresResponse';
+  genres?: Maybe<Array<Maybe<Genre>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchInput = {
+  searchKey?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  paginationInput?: Maybe<PaginationInput>;
+};
+
+export type SearchMovieTrailersResponse = {
+  __typename?: 'SearchMovieTrailersResponse';
+  movieTrailers?: Maybe<Array<Maybe<MovieTrailer>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchPostgresMoviesResponse = {
+  __typename?: 'SearchPostgresMoviesResponse';
+  postgresMovies?: Maybe<Array<Maybe<PostgresMovie>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchProductionCompaniesResponse = {
+  __typename?: 'SearchProductionCompaniesResponse';
+  productionCompanies?: Maybe<Array<Maybe<ProductionCompany>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchProductionCountriesResponse = {
+  __typename?: 'SearchProductionCountriesResponse';
+  productionCountries?: Maybe<Array<Maybe<ProductionCountry>>>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type SearchSpokenLanguagesResponse = {
+  __typename?: 'SearchSpokenLanguagesResponse';
+  spokenLanguages?: Maybe<Array<Maybe<SpokenLanguage>>>;
+  pagination?: Maybe<Pagination>;
+};
 
 export type SpokenLanguage = {
   __typename?: 'SpokenLanguage';
@@ -485,6 +576,13 @@ export type GetCollectionQueryVariables = Exact<{
 
 export type GetCollectionQuery = { __typename?: 'Query', getCollection?: Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }> };
 
+export type SearchCollectionsByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchCollectionsByKeyValueQuery = { __typename?: 'Query', searchCollectionsByKeyValue?: Maybe<{ __typename?: 'SearchCollectionsResponse', collections?: Maybe<Array<Maybe<{ __typename?: 'Collection', id: string, createdAt: any, updatedAt: any, name: string, tmdbId: string, overview: string, posterPath?: Maybe<string>, backdropPath?: Maybe<string>, parts: Array<Maybe<string>> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetGenresQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -499,6 +597,13 @@ export type GetGenreQueryVariables = Exact<{
 
 export type GetGenreQuery = { __typename?: 'Query', getGenre?: Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }> };
 
+export type SearchGenresByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchGenresByKeyValueQuery = { __typename?: 'Query', searchGenresByKeyValue?: Maybe<{ __typename?: 'SearchGenresResponse', genres?: Maybe<Array<Maybe<{ __typename?: 'Genre', id: string, createdAt: any, updatedAt: any, tmdbId: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetImagesQueryVariables = Exact<{
   page: Scalars['Int'];
 }>;
@@ -511,19 +616,33 @@ export type GetMovieTrailersQueryVariables = Exact<{
 }>;
 
 
-export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<{ __typename?: 'GetMovieTrailersReponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+export type GetMovieTrailersQuery = { __typename?: 'Query', getMovieTrailers?: Maybe<{ __typename?: 'GetMovieTrailersReponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetMovieTrailerQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMovieTrailerQuery = { __typename?: 'Query', getMovieTrailer?: Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string }> };
+export type GetMovieTrailerQuery = { __typename?: 'Query', getMovieTrailer?: Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }> };
+
+export type SearchMovieTrailersByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchMovieTrailersByKeyValueQuery = { __typename?: 'Query', searchMovieTrailersByKeyValue?: Maybe<{ __typename?: 'SearchMovieTrailersResponse', movieTrailers?: Maybe<Array<Maybe<{ __typename?: 'MovieTrailer', id: string, createdAt: string, updatedAt: string, iso_639_1?: Maybe<any>, iso_3166_1?: Maybe<any>, name?: Maybe<string>, key?: Maybe<string>, site?: Maybe<string>, size?: Maybe<number>, type?: Maybe<string>, official?: Maybe<boolean>, publishedAt?: Maybe<any>, tmdbId: string, movieId: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetDynamoMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetDynamoMoviesQuery = { __typename?: 'Query', getDynamoMovies?: Maybe<Array<Maybe<{ __typename?: 'DynamoMovie', title: string, tmdbId: string, id: string, mediaType: string }>>> };
+
+export type GetPostgresMovieQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie?: Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }> };
 
 export type GetPostgresMoviesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
@@ -532,12 +651,12 @@ export type GetPostgresMoviesQueryVariables = Exact<{
 
 export type GetPostgresMoviesQuery = { __typename?: 'Query', getPostgresMovies?: Maybe<{ __typename?: 'GetPostgresMoviesResponse', postgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
-export type GetPostgresMovieQueryVariables = Exact<{
-  id: Scalars['String'];
+export type SearchPostgresMoviesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
 }>;
 
 
-export type GetPostgresMovieQuery = { __typename?: 'Query', getPostgresMovie?: Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }> };
+export type SearchPostgresMoviesByKeyValueQuery = { __typename?: 'Query', searchPostgresMoviesByKeyValue?: Maybe<{ __typename?: 'SearchPostgresMoviesResponse', postgresMovies?: Maybe<Array<Maybe<{ __typename?: 'PostgresMovie', adult: boolean, backdropPath?: Maybe<string>, collection?: Maybe<string>, budget: any, createdAt: any, updatedAt: any, fileName: string, genres?: Maybe<Array<Maybe<string>>>, homepage?: Maybe<string>, id: string, tmdbId: string, imdbId?: Maybe<string>, originalLanguage: string, originalTitle: string, overview?: Maybe<string>, popularity?: Maybe<number>, posterPath?: Maybe<string>, productionCompanies?: Maybe<Array<Maybe<string>>>, productionCountries?: Maybe<Array<Maybe<string>>>, releaseDate: string, revenue: any, runtime?: Maybe<number>, spokenLanguages?: Maybe<Array<Maybe<string>>>, status: string, tagline?: Maybe<string>, title: string, trailers?: Maybe<Array<Maybe<string>>>, video: boolean, voteAverage: number, voteCount: number }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 export type GetProductionCompaniesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
@@ -553,6 +672,13 @@ export type GetProductionCompanyQueryVariables = Exact<{
 
 export type GetProductionCompanyQuery = { __typename?: 'Query', getProductionCompany?: Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }> };
 
+export type SearchProductionCompaniesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchProductionCompaniesByKeyValueQuery = { __typename?: 'Query', searchProductionCompaniesByKeyValue?: Maybe<{ __typename?: 'SearchProductionCompaniesResponse', productionCompanies?: Maybe<Array<Maybe<{ __typename?: 'ProductionCompany', id: string, name: string, createdAt: any, updatedAt: any, tmdbId: string, logoPath?: Maybe<string>, originCountry: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetProductionCountriesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -567,6 +693,13 @@ export type GetProductionCountryQueryVariables = Exact<{
 
 export type GetProductionCountryQuery = { __typename?: 'Query', getProductionCountry?: Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }> };
 
+export type SearchProductionCountriesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchProductionCountriesByKeyValueQuery = { __typename?: 'Query', searchProductionCountriesByKeyValue?: Maybe<{ __typename?: 'SearchProductionCountriesResponse', productionCountries?: Maybe<Array<Maybe<{ __typename?: 'ProductionCountry', id: string, createdAt: any, updatedAt: any, iso_3166_1: string, name: string }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
+
 export type GetSpokenLanguagesQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;
 }>;
@@ -580,6 +713,13 @@ export type GetSpokenLanguageQueryVariables = Exact<{
 
 
 export type GetSpokenLanguageQuery = { __typename?: 'Query', getSpokenLanguage?: Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }> };
+
+export type SearchSpokenLanguagesByKeyValueQueryVariables = Exact<{
+  searchInput?: Maybe<SearchInput>;
+}>;
+
+
+export type SearchSpokenLanguagesByKeyValueQuery = { __typename?: 'Query', searchSpokenLanguagesByKeyValue?: Maybe<{ __typename?: 'SearchSpokenLanguagesResponse', spokenLanguages?: Maybe<Array<Maybe<{ __typename?: 'SpokenLanguage', id: string, createdAt: any, updatedAt: any, iso_639_1: string, name?: Maybe<string>, englishName?: Maybe<string> }>>>, pagination?: Maybe<{ __typename?: 'Pagination', total: number }> }> };
 
 
 export const GetCollectionsDocument = gql`
@@ -675,6 +815,54 @@ export function useGetCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetCollectionQueryHookResult = ReturnType<typeof useGetCollectionQuery>;
 export type GetCollectionLazyQueryHookResult = ReturnType<typeof useGetCollectionLazyQuery>;
 export type GetCollectionQueryResult = Apollo.QueryResult<GetCollectionQuery, GetCollectionQueryVariables>;
+export const SearchCollectionsByKeyValueDocument = gql`
+    query searchCollectionsByKeyValue($searchInput: SearchInput) {
+  searchCollectionsByKeyValue(searchInput: $searchInput) {
+    collections {
+      id
+      createdAt
+      updatedAt
+      name
+      tmdbId
+      overview
+      posterPath
+      backdropPath
+      parts
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchCollectionsByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchCollectionsByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchCollectionsByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchCollectionsByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchCollectionsByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchCollectionsByKeyValueQuery, SearchCollectionsByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchCollectionsByKeyValueQuery, SearchCollectionsByKeyValueQueryVariables>(SearchCollectionsByKeyValueDocument, options);
+      }
+export function useSearchCollectionsByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchCollectionsByKeyValueQuery, SearchCollectionsByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchCollectionsByKeyValueQuery, SearchCollectionsByKeyValueQueryVariables>(SearchCollectionsByKeyValueDocument, options);
+        }
+export type SearchCollectionsByKeyValueQueryHookResult = ReturnType<typeof useSearchCollectionsByKeyValueQuery>;
+export type SearchCollectionsByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchCollectionsByKeyValueLazyQuery>;
+export type SearchCollectionsByKeyValueQueryResult = Apollo.QueryResult<SearchCollectionsByKeyValueQuery, SearchCollectionsByKeyValueQueryVariables>;
 export const GetGenresDocument = gql`
     query getGenres($paginationInput: PaginationInput) {
   getGenres(paginationInput: $paginationInput) {
@@ -760,6 +948,50 @@ export function useGetGenreLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetGenreQueryHookResult = ReturnType<typeof useGetGenreQuery>;
 export type GetGenreLazyQueryHookResult = ReturnType<typeof useGetGenreLazyQuery>;
 export type GetGenreQueryResult = Apollo.QueryResult<GetGenreQuery, GetGenreQueryVariables>;
+export const SearchGenresByKeyValueDocument = gql`
+    query searchGenresByKeyValue($searchInput: SearchInput) {
+  searchGenresByKeyValue(searchInput: $searchInput) {
+    genres {
+      id
+      createdAt
+      updatedAt
+      tmdbId
+      name
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchGenresByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchGenresByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchGenresByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchGenresByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchGenresByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchGenresByKeyValueQuery, SearchGenresByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchGenresByKeyValueQuery, SearchGenresByKeyValueQueryVariables>(SearchGenresByKeyValueDocument, options);
+      }
+export function useSearchGenresByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchGenresByKeyValueQuery, SearchGenresByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchGenresByKeyValueQuery, SearchGenresByKeyValueQueryVariables>(SearchGenresByKeyValueDocument, options);
+        }
+export type SearchGenresByKeyValueQueryHookResult = ReturnType<typeof useSearchGenresByKeyValueQuery>;
+export type SearchGenresByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchGenresByKeyValueLazyQuery>;
+export type SearchGenresByKeyValueQueryResult = Apollo.QueryResult<SearchGenresByKeyValueQuery, SearchGenresByKeyValueQueryVariables>;
 export const GetImagesDocument = gql`
     query getImages($page: Int!) {
   getImages(page: $page) {
@@ -813,6 +1045,7 @@ export const GetMovieTrailersDocument = gql`
         official
         publishedAt
         tmdbId
+        movieId
       }
     }
     pagination {
@@ -865,6 +1098,7 @@ export const GetMovieTrailerDocument = gql`
     official
     publishedAt
     tmdbId
+    movieId
   }
 }
     `;
@@ -896,6 +1130,59 @@ export function useGetMovieTrailerLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetMovieTrailerQueryHookResult = ReturnType<typeof useGetMovieTrailerQuery>;
 export type GetMovieTrailerLazyQueryHookResult = ReturnType<typeof useGetMovieTrailerLazyQuery>;
 export type GetMovieTrailerQueryResult = Apollo.QueryResult<GetMovieTrailerQuery, GetMovieTrailerQueryVariables>;
+export const SearchMovieTrailersByKeyValueDocument = gql`
+    query searchMovieTrailersByKeyValue($searchInput: SearchInput) {
+  searchMovieTrailersByKeyValue(searchInput: $searchInput) {
+    movieTrailers {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      iso_3166_1
+      name
+      key
+      site
+      size
+      type
+      official
+      publishedAt
+      tmdbId
+      movieId
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchMovieTrailersByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchMovieTrailersByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchMovieTrailersByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchMovieTrailersByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchMovieTrailersByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchMovieTrailersByKeyValueQuery, SearchMovieTrailersByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchMovieTrailersByKeyValueQuery, SearchMovieTrailersByKeyValueQueryVariables>(SearchMovieTrailersByKeyValueDocument, options);
+      }
+export function useSearchMovieTrailersByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchMovieTrailersByKeyValueQuery, SearchMovieTrailersByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchMovieTrailersByKeyValueQuery, SearchMovieTrailersByKeyValueQueryVariables>(SearchMovieTrailersByKeyValueDocument, options);
+        }
+export type SearchMovieTrailersByKeyValueQueryHookResult = ReturnType<typeof useSearchMovieTrailersByKeyValueQuery>;
+export type SearchMovieTrailersByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchMovieTrailersByKeyValueLazyQuery>;
+export type SearchMovieTrailersByKeyValueQueryResult = Apollo.QueryResult<SearchMovieTrailersByKeyValueQuery, SearchMovieTrailersByKeyValueQueryVariables>;
 export const GetDynamoMoviesDocument = gql`
     query getDynamoMovies {
   getDynamoMovies {
@@ -933,6 +1220,70 @@ export function useGetDynamoMoviesLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetDynamoMoviesQueryHookResult = ReturnType<typeof useGetDynamoMoviesQuery>;
 export type GetDynamoMoviesLazyQueryHookResult = ReturnType<typeof useGetDynamoMoviesLazyQuery>;
 export type GetDynamoMoviesQueryResult = Apollo.QueryResult<GetDynamoMoviesQuery, GetDynamoMoviesQueryVariables>;
+export const GetPostgresMovieDocument = gql`
+    query getPostgresMovie($id: String!) {
+  getPostgresMovie(id: $id) {
+    adult
+    backdropPath
+    collection
+    budget
+    createdAt
+    updatedAt
+    fileName
+    genres
+    homepage
+    id
+    tmdbId
+    imdbId
+    originalLanguage
+    originalTitle
+    overview
+    popularity
+    posterPath
+    productionCompanies
+    productionCountries
+    releaseDate
+    revenue
+    runtime
+    spokenLanguages
+    status
+    tagline
+    title
+    trailers
+    video
+    voteAverage
+    voteCount
+  }
+}
+    `;
+
+/**
+ * __useGetPostgresMovieQuery__
+ *
+ * To run a query within a React component, call `useGetPostgresMovieQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostgresMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPostgresMovieQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetPostgresMovieQuery(baseOptions: Apollo.QueryHookOptions<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>(GetPostgresMovieDocument, options);
+      }
+export function useGetPostgresMovieLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>(GetPostgresMovieDocument, options);
+        }
+export type GetPostgresMovieQueryHookResult = ReturnType<typeof useGetPostgresMovieQuery>;
+export type GetPostgresMovieLazyQueryHookResult = ReturnType<typeof useGetPostgresMovieLazyQuery>;
+export type GetPostgresMovieQueryResult = Apollo.QueryResult<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>;
 export const GetPostgresMoviesDocument = gql`
     query getPostgresMovies($paginationInput: PaginationInput) {
   getPostgresMovies(paginationInput: $paginationInput) {
@@ -1004,70 +1355,77 @@ export function useGetPostgresMoviesLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetPostgresMoviesQueryHookResult = ReturnType<typeof useGetPostgresMoviesQuery>;
 export type GetPostgresMoviesLazyQueryHookResult = ReturnType<typeof useGetPostgresMoviesLazyQuery>;
 export type GetPostgresMoviesQueryResult = Apollo.QueryResult<GetPostgresMoviesQuery, GetPostgresMoviesQueryVariables>;
-export const GetPostgresMovieDocument = gql`
-    query getPostgresMovie($id: String!) {
-  getPostgresMovie(id: $id) {
-    adult
-    backdropPath
-    collection
-    budget
-    createdAt
-    updatedAt
-    fileName
-    genres
-    homepage
-    id
-    tmdbId
-    imdbId
-    originalLanguage
-    originalTitle
-    overview
-    popularity
-    posterPath
-    productionCompanies
-    productionCountries
-    releaseDate
-    revenue
-    runtime
-    spokenLanguages
-    status
-    tagline
-    title
-    trailers
-    video
-    voteAverage
-    voteCount
+export const SearchPostgresMoviesByKeyValueDocument = gql`
+    query searchPostgresMoviesByKeyValue($searchInput: SearchInput) {
+  searchPostgresMoviesByKeyValue(searchInput: $searchInput) {
+    postgresMovies {
+      ... on PostgresMovie {
+        adult
+        backdropPath
+        collection
+        budget
+        createdAt
+        updatedAt
+        fileName
+        genres
+        homepage
+        id
+        tmdbId
+        imdbId
+        originalLanguage
+        originalTitle
+        overview
+        popularity
+        posterPath
+        productionCompanies
+        productionCountries
+        releaseDate
+        revenue
+        runtime
+        spokenLanguages
+        status
+        tagline
+        title
+        trailers
+        video
+        voteAverage
+        voteCount
+      }
+    }
+    pagination {
+      total
+    }
   }
 }
     `;
 
 /**
- * __useGetPostgresMovieQuery__
+ * __useSearchPostgresMoviesByKeyValueQuery__
  *
- * To run a query within a React component, call `useGetPostgresMovieQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostgresMovieQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSearchPostgresMoviesByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchPostgresMoviesByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetPostgresMovieQuery({
+ * const { data, loading, error } = useSearchPostgresMoviesByKeyValueQuery({
  *   variables: {
- *      id: // value for 'id'
+ *      searchInput: // value for 'searchInput'
  *   },
  * });
  */
-export function useGetPostgresMovieQuery(baseOptions: Apollo.QueryHookOptions<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>) {
+export function useSearchPostgresMoviesByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchPostgresMoviesByKeyValueQuery, SearchPostgresMoviesByKeyValueQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>(GetPostgresMovieDocument, options);
+        return Apollo.useQuery<SearchPostgresMoviesByKeyValueQuery, SearchPostgresMoviesByKeyValueQueryVariables>(SearchPostgresMoviesByKeyValueDocument, options);
       }
-export function useGetPostgresMovieLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>) {
+export function useSearchPostgresMoviesByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchPostgresMoviesByKeyValueQuery, SearchPostgresMoviesByKeyValueQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>(GetPostgresMovieDocument, options);
+          return Apollo.useLazyQuery<SearchPostgresMoviesByKeyValueQuery, SearchPostgresMoviesByKeyValueQueryVariables>(SearchPostgresMoviesByKeyValueDocument, options);
         }
-export type GetPostgresMovieQueryHookResult = ReturnType<typeof useGetPostgresMovieQuery>;
-export type GetPostgresMovieLazyQueryHookResult = ReturnType<typeof useGetPostgresMovieLazyQuery>;
-export type GetPostgresMovieQueryResult = Apollo.QueryResult<GetPostgresMovieQuery, GetPostgresMovieQueryVariables>;
+export type SearchPostgresMoviesByKeyValueQueryHookResult = ReturnType<typeof useSearchPostgresMoviesByKeyValueQuery>;
+export type SearchPostgresMoviesByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchPostgresMoviesByKeyValueLazyQuery>;
+export type SearchPostgresMoviesByKeyValueQueryResult = Apollo.QueryResult<SearchPostgresMoviesByKeyValueQuery, SearchPostgresMoviesByKeyValueQueryVariables>;
 export const GetProductionCompaniesDocument = gql`
     query getProductionCompanies($paginationInput: PaginationInput) {
   getProductionCompanies(paginationInput: $paginationInput) {
@@ -1157,6 +1515,52 @@ export function useGetProductionCompanyLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type GetProductionCompanyQueryHookResult = ReturnType<typeof useGetProductionCompanyQuery>;
 export type GetProductionCompanyLazyQueryHookResult = ReturnType<typeof useGetProductionCompanyLazyQuery>;
 export type GetProductionCompanyQueryResult = Apollo.QueryResult<GetProductionCompanyQuery, GetProductionCompanyQueryVariables>;
+export const SearchProductionCompaniesByKeyValueDocument = gql`
+    query searchProductionCompaniesByKeyValue($searchInput: SearchInput) {
+  searchProductionCompaniesByKeyValue(searchInput: $searchInput) {
+    productionCompanies {
+      id
+      name
+      createdAt
+      updatedAt
+      tmdbId
+      logoPath
+      originCountry
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchProductionCompaniesByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchProductionCompaniesByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchProductionCompaniesByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchProductionCompaniesByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchProductionCompaniesByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchProductionCompaniesByKeyValueQuery, SearchProductionCompaniesByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchProductionCompaniesByKeyValueQuery, SearchProductionCompaniesByKeyValueQueryVariables>(SearchProductionCompaniesByKeyValueDocument, options);
+      }
+export function useSearchProductionCompaniesByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchProductionCompaniesByKeyValueQuery, SearchProductionCompaniesByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchProductionCompaniesByKeyValueQuery, SearchProductionCompaniesByKeyValueQueryVariables>(SearchProductionCompaniesByKeyValueDocument, options);
+        }
+export type SearchProductionCompaniesByKeyValueQueryHookResult = ReturnType<typeof useSearchProductionCompaniesByKeyValueQuery>;
+export type SearchProductionCompaniesByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchProductionCompaniesByKeyValueLazyQuery>;
+export type SearchProductionCompaniesByKeyValueQueryResult = Apollo.QueryResult<SearchProductionCompaniesByKeyValueQuery, SearchProductionCompaniesByKeyValueQueryVariables>;
 export const GetProductionCountriesDocument = gql`
     query getProductionCountries($paginationInput: PaginationInput) {
   getProductionCountries(paginationInput: $paginationInput) {
@@ -1242,6 +1646,50 @@ export function useGetProductionCountryLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type GetProductionCountryQueryHookResult = ReturnType<typeof useGetProductionCountryQuery>;
 export type GetProductionCountryLazyQueryHookResult = ReturnType<typeof useGetProductionCountryLazyQuery>;
 export type GetProductionCountryQueryResult = Apollo.QueryResult<GetProductionCountryQuery, GetProductionCountryQueryVariables>;
+export const SearchProductionCountriesByKeyValueDocument = gql`
+    query searchProductionCountriesByKeyValue($searchInput: SearchInput) {
+  searchProductionCountriesByKeyValue(searchInput: $searchInput) {
+    productionCountries {
+      id
+      createdAt
+      updatedAt
+      iso_3166_1
+      name
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchProductionCountriesByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchProductionCountriesByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchProductionCountriesByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchProductionCountriesByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchProductionCountriesByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchProductionCountriesByKeyValueQuery, SearchProductionCountriesByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchProductionCountriesByKeyValueQuery, SearchProductionCountriesByKeyValueQueryVariables>(SearchProductionCountriesByKeyValueDocument, options);
+      }
+export function useSearchProductionCountriesByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchProductionCountriesByKeyValueQuery, SearchProductionCountriesByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchProductionCountriesByKeyValueQuery, SearchProductionCountriesByKeyValueQueryVariables>(SearchProductionCountriesByKeyValueDocument, options);
+        }
+export type SearchProductionCountriesByKeyValueQueryHookResult = ReturnType<typeof useSearchProductionCountriesByKeyValueQuery>;
+export type SearchProductionCountriesByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchProductionCountriesByKeyValueLazyQuery>;
+export type SearchProductionCountriesByKeyValueQueryResult = Apollo.QueryResult<SearchProductionCountriesByKeyValueQuery, SearchProductionCountriesByKeyValueQueryVariables>;
 export const GetSpokenLanguagesDocument = gql`
     query getSpokenLanguages($paginationInput: PaginationInput) {
   getSpokenLanguages(paginationInput: $paginationInput) {
@@ -1329,3 +1777,48 @@ export function useGetSpokenLanguageLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetSpokenLanguageQueryHookResult = ReturnType<typeof useGetSpokenLanguageQuery>;
 export type GetSpokenLanguageLazyQueryHookResult = ReturnType<typeof useGetSpokenLanguageLazyQuery>;
 export type GetSpokenLanguageQueryResult = Apollo.QueryResult<GetSpokenLanguageQuery, GetSpokenLanguageQueryVariables>;
+export const SearchSpokenLanguagesByKeyValueDocument = gql`
+    query searchSpokenLanguagesByKeyValue($searchInput: SearchInput) {
+  searchSpokenLanguagesByKeyValue(searchInput: $searchInput) {
+    spokenLanguages {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      name
+      englishName
+    }
+    pagination {
+      total
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchSpokenLanguagesByKeyValueQuery__
+ *
+ * To run a query within a React component, call `useSearchSpokenLanguagesByKeyValueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchSpokenLanguagesByKeyValueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchSpokenLanguagesByKeyValueQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchSpokenLanguagesByKeyValueQuery(baseOptions?: Apollo.QueryHookOptions<SearchSpokenLanguagesByKeyValueQuery, SearchSpokenLanguagesByKeyValueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchSpokenLanguagesByKeyValueQuery, SearchSpokenLanguagesByKeyValueQueryVariables>(SearchSpokenLanguagesByKeyValueDocument, options);
+      }
+export function useSearchSpokenLanguagesByKeyValueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchSpokenLanguagesByKeyValueQuery, SearchSpokenLanguagesByKeyValueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchSpokenLanguagesByKeyValueQuery, SearchSpokenLanguagesByKeyValueQueryVariables>(SearchSpokenLanguagesByKeyValueDocument, options);
+        }
+export type SearchSpokenLanguagesByKeyValueQueryHookResult = ReturnType<typeof useSearchSpokenLanguagesByKeyValueQuery>;
+export type SearchSpokenLanguagesByKeyValueLazyQueryHookResult = ReturnType<typeof useSearchSpokenLanguagesByKeyValueLazyQuery>;
+export type SearchSpokenLanguagesByKeyValueQueryResult = Apollo.QueryResult<SearchSpokenLanguagesByKeyValueQuery, SearchSpokenLanguagesByKeyValueQueryVariables>;

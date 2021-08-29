@@ -1,3 +1,5 @@
+'use strict';
+
 const common = require('./webpack.tasks.common');
 const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require(`clean-webpack-plugin`);

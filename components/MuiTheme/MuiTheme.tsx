@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from '@material-ui/core';
+import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import React from 'react';
 
@@ -13,6 +13,8 @@ export default function MuiTheme({ children }: Props) {
     <ThemeProvider
       theme={createTheme({
         typography: {
+          htmlFontSize: 10,
+          fontSize: 10,
           h1: {
             fontSize: `4.5rem`,
             [breakpoints.down(`sm`)]: {
@@ -25,7 +27,7 @@ export default function MuiTheme({ children }: Props) {
             main: `#0097a7`,
           },
           secondary: {
-            main: `#ff4081`,
+            main: `#E50914`,
           },
           text: {
             primary: `#fff`,
@@ -44,6 +46,11 @@ export default function MuiTheme({ children }: Props) {
           MuiTextField: {
             root: {
               borderColor: `rgba(255, 255, 255, 0.3)`,
+            },
+          },
+          MuiTypography: {
+            root: {
+              color: `white`,
             },
           },
           MuiInputBase: {
@@ -69,6 +76,7 @@ export default function MuiTheme({ children }: Props) {
         },
       })}
     >
+      <CssBaseline />
       {children}
     </ThemeProvider>
   );

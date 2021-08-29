@@ -1,7 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
 import * as Knex from 'knex';
 import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
+import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
+import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
+import { validateSearchParams } from '../../lib/serverSearch';
 import { Pagination, ProductionCountry } from '../../types/generated.types';
 import { Tables } from '../../types/tables.enum';
 
@@ -56,5 +59,46 @@ export const productionCountryResolvers = {
     }
 
     return country;
+  },
+  searchProductionCountriesByKeyValue: async (_: any, { searchInput }: { searchInput: any }, { db }: { db: Knex }) => {
+    let productionCountries: ProductionCountry[];
+    let pagination: Pagination = {
+      total: NaN,
+    };
+    const paginationInput = searchInput?.paginationInput;
+    const offset = paginationInput?.offset ?? NaN;
+    const amount = paginationInput?.amount ?? NaN;
+    const searchKey = searchInput?.searchKey;
+    const value = searchInput?.value;
+
+    const validPagination = validatePagination({ offset, amount });
+    const validSearchParams = await validateSearchParams({ searchInput, db, table: Tables.PRODUCTION_COUNTRIES });
+
+    const { valid, errors, messages } = serverErrorReducer([validPagination, validSearchParams]);
+
+    if (!valid) {
+      throw new UserInputError(`${errors} errors`, {
+        errors,
+        messages,
+      });
+    }
+
+    try {
+      const [total, dbProductionCountries] = await paginatedDbSEARCH<ProductionCountry>({
+        db,
+        offset,
+        amount,
+        table: Tables.PRODUCTION_COUNTRIES,
+        searchKey,
+        value,
+      });
+      productionCountries = dbProductionCountries;
+      pagination = repaginate({ paginationInput, total });
+    } catch (knexError) {
+      console.error(knexError);
+      productionCountries = [];
+    }
+
+    return { productionCountries, pagination };
   },
 };

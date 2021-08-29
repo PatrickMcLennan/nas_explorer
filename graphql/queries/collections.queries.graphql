@@ -32,3 +32,22 @@ query getCollection($id: String!) {
     parts
   }
 }
+
+query searchCollectionsByKeyValue($searchInput: SearchInput) {
+  searchCollectionsByKeyValue(searchInput: $searchInput) {
+    collections {
+      id
+      createdAt
+      updatedAt
+      name
+      tmdbId
+      overview
+      posterPath
+      backdropPath
+      parts
+    }
+    pagination {
+      total
+    }
+  }
+}

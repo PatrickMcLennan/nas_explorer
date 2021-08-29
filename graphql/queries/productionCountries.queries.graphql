@@ -24,3 +24,18 @@ query getProductionCountry($id: String!) {
     name
   }
 }
+
+query searchProductionCountriesByKeyValue($searchInput: SearchInput) {
+  searchProductionCountriesByKeyValue(searchInput: $searchInput) {
+    productionCountries {
+      id
+      createdAt
+      updatedAt
+      iso_3166_1
+      name
+    }
+    pagination {
+      total
+    }
+  }
+}

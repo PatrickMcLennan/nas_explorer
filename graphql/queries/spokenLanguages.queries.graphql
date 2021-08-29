@@ -26,3 +26,19 @@ query getSpokenLanguage($id: String!) {
     englishName
   }
 }
+
+query searchSpokenLanguagesByKeyValue($searchInput: SearchInput) {
+  searchSpokenLanguagesByKeyValue(searchInput: $searchInput) {
+    spokenLanguages {
+      id
+      createdAt
+      updatedAt
+      iso_639_1
+      name
+      englishName
+    }
+    pagination {
+      total
+    }
+  }
+}

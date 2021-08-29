@@ -1,3 +1,5 @@
+'use strict';
+
 const common = require('./webpack.aws.common');
 const { merge } = require('webpack-merge');
 

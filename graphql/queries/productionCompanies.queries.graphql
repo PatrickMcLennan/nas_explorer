@@ -28,3 +28,20 @@ query getProductionCompany($id: String!) {
     originCountry
   }
 }
+
+query searchProductionCompaniesByKeyValue($searchInput: SearchInput) {
+  searchProductionCompaniesByKeyValue(searchInput: $searchInput) {
+    productionCompanies {
+      id
+      name
+      createdAt
+      updatedAt
+      tmdbId
+      logoPath
+      originCountry
+    }
+    pagination {
+      total
+    }
+  }
+}
