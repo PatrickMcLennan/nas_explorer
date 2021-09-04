@@ -34,7 +34,7 @@ export const productionCountryResolvers = {
       });
 
       productionCountries = dbProductionCountries;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       productionCountries = [];
@@ -93,7 +93,7 @@ export const productionCountryResolvers = {
         value,
       });
       productionCountries = dbProductionCountries;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       productionCountries = [];

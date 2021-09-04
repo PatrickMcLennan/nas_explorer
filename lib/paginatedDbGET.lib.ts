@@ -8,7 +8,7 @@ type Props = {
   table: Tables;
 };
 
-export const paginatedDbGET = async <T>({ db, offset, amount, table }: Props): Promise<[{ count: number }, T[]]> => {
+export const paginatedDbGET = async <T>({ db, offset, amount, table }: Props): Promise<[{ count: string }, T[]]> => {
   let get: any;
 
   if (!Number.isNaN(offset) && !Number.isNaN(amount)) {

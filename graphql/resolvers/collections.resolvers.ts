@@ -16,7 +16,7 @@ export const collectionResolvers = {
   ): Promise<GetCollectionsResponse> => {
     let collections!: Collection[];
     let pagination: Pagination = {
-      total: NaN,
+      total: 0,
     };
     const offset = paginationInput?.offset ?? NaN;
     const amount = paginationInput?.amount ?? NaN;
@@ -38,11 +38,13 @@ export const collectionResolvers = {
         table: Tables.COLLECTIONS,
       });
       collections = dbCollections;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       collections = [];
     }
+
+    console.log(pagination);
 
     return { collections, pagination };
   },
@@ -99,7 +101,7 @@ export const collectionResolvers = {
         value,
       });
       collections = dbCollections;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       collections = [];

@@ -51,7 +51,7 @@ export const movieResolvers = {
       });
 
       postgresMovies = dbMovies;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       postgresMovies = [];
@@ -112,7 +112,7 @@ export const movieResolvers = {
         value,
       });
       postgresMovies = dbPostgresMovies;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       postgresMovies = [];

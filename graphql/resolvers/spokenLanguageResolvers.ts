@@ -35,7 +35,7 @@ export const spokenLangaugeResolvers = {
       });
 
       spokenLanguages = dbMovieTrailers;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       spokenLanguages = [];
@@ -95,7 +95,7 @@ export const spokenLangaugeResolvers = {
         value,
       });
       spokenLanguages = dbSpokenLanguages;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       spokenLanguages = [];

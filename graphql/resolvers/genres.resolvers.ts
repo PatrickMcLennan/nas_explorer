@@ -33,7 +33,7 @@ export const genresResolvers = {
         table: Tables.GENRES,
       });
       genres = dbGenres;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       genres = [];
@@ -93,7 +93,7 @@ export const genresResolvers = {
         value,
       });
       genres = dbGenres;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       genres = [];

@@ -35,7 +35,7 @@ export const movieTrailerResolvers = {
       });
 
       movieTrailers = dbMovieTrailers;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       movieTrailers = [];
@@ -95,7 +95,7 @@ export const movieTrailerResolvers = {
         value,
       });
       movieTrailers = dbMovieTrailers;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       movieTrailers = [];

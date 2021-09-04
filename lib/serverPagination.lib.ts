@@ -29,13 +29,6 @@ export const validatePagination = ({ offset, amount }: PaginationInput): ServerV
   };
 };
 
-export const repaginate = ({
-  paginationInput,
-  total,
-}: {
-  paginationInput: PaginationInput;
-  total: { count: number };
-}) => ({
-  ...paginationInput,
-  total: Number(total?.count ?? NaN),
+export const repaginate = ({ total }: { total: { count: string } }) => ({
+  total: Number(total?.count ?? 0),
 });

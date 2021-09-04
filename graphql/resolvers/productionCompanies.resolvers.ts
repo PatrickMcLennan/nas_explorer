@@ -34,7 +34,7 @@ export const productionCompanyResolvers = {
       });
 
       productionCompanies = dbProductionCompanies;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       productionCompanies = [];
@@ -93,7 +93,7 @@ export const productionCompanyResolvers = {
         value,
       });
       productionCompanies = dbProductionCompanies;
-      pagination = repaginate({ paginationInput, total });
+      pagination = repaginate({ total });
     } catch (knexError) {
       console.error(knexError);
       productionCompanies = [];

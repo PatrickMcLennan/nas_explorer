@@ -21,6 +21,9 @@ export default function MuiTheme({ children }: Props) {
               fontSize: `4.8rem`,
             },
           },
+          h3: {
+            fontSize: `2.1rem`,
+          },
         },
         palette: {
           primary: {
