@@ -13,6 +13,7 @@ import {
 } from '../../types/generated.types';
 import { Tables } from '../../types/tables.enum';
 import { v4 as uuidv4 } from 'uuid';
+import { AxiosError, AxiosResponse } from 'axios';
 
 export async function seed(knex: Knex): Promise<void> {
   let dynamoMovies: DynamoMovie[];
@@ -38,14 +39,14 @@ export async function seed(knex: Knex): Promise<void> {
         tmdbClient({
           url: `/movie/${dynamoMovie.tmdbId}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=videos`,
         })
-          .then(({ data }) => ({
+          .then(({ data }: AxiosResponse) => ({
             ...data,
             id: dynamoMovie.id,
             fileName: dynamoMovie.title,
             tmdbId: dynamoMovie.tmdbId,
           }))
-          .catch((err) => {
-            if (err.response.status === 404) {
+          .catch((err: AxiosError) => {
+            if (err?.response?.status === 404) {
               console.error(`${dynamoMovie.title} with an id of ${dynamoMovie.tmdbId} was not found`);
               return {
                 error: true,
@@ -72,13 +73,13 @@ export async function seed(knex: Knex): Promise<void> {
         tmdbClient({
           url: `/collection/${tmdbId}?api_key=${TMDB_API_KEY}`,
           method: `GET`,
-        }).then(({ data }) => ({
+        }).then(({ data }: AxiosResponse) => ({
           id: uuid,
           tmdbId,
           name: data?.name,
           overview: data?.overview,
-          posterPath: data?.posterPath,
-          backdropPath: data?.backdropPath,
+          posterPath: data?.poster_path,
+          backdropPath: data?.backdrop_path,
           parts: data?.parts?.map?.((part: any) => part?.id),
         }))
       )

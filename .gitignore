@@ -34,12 +34,24 @@ yarn-error.log*
 # vercel
 .vercel
 
-express/dist/
-aws/dist/
-clients/
-stories/
-pages/
-validators/
+@eaDir/
+Images/
+Movies/
+Music/
+Pictures/
+TV/
+aws/@eadir/
+components/@eadir/
+configs/@eadir/
+graphql/@eadir/
+express/dist/**/*.js
+aws/dist/*
+clients/**/*.js
+pages/**/*.js
+validators/**/*.js
 html/
 tasks/dist/
 cdk.out/
+
+express/selfsigned.crt
+express/selfsigned.key

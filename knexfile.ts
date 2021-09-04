@@ -1,4 +1,4 @@
-import type { Config } from 'knex';
+import { Config } from 'knex';
 import { POSTGRES_USER, POSTGRES_PASSWORD, DATABASE_URL_PRODUCTION, DATABASE_URL_DEVELOPMENT, NODE_ENV } from './env';
 import path from 'path';
 
