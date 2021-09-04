@@ -44,8 +44,6 @@ export const collectionResolvers = {
       collections = [];
     }
 
-    console.log(pagination);
-
     return { collections, pagination };
   },
 

@@ -20,8 +20,6 @@ export const paginatedDbSEARCH = async <T>({
 }: Props): Promise<[{ count: string }, T[]]> => {
   let get: any;
 
-  console.log(`value from function: \n${value}`);
-
   if (!Number.isNaN(offset) && !Number.isNaN(amount)) {
     get = await Promise.all([
       db

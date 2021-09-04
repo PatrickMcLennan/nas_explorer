@@ -34,11 +34,7 @@ const Home: NextPage<Props> = ({ postgresMovies, pagination }: Props) => {
 
   return (
     <>
-      <SEO
-        title="NAS Netflix"
-        description="View and watch all the media on this NAS"
-        image="/not-found-background.jpeg"
-      />
+      <SEO title="" description="View and watch all the media on this NAS" image="/not-found-background.jpeg" />
       <Header />
       <Banner movie={randomMovie} />
       <MovieSwiper movies={postgresMovies.slice(0, 10)} heading="Genre Name" />
@@ -66,7 +62,6 @@ export const getStaticProps = async () =>
       `
     )
     .then(({ getGenres }) => {
-      console.log(getGenres);
       return nodeGraphQl.request(gql`
         query getPostgresMovies {
           getPostgresMovies {

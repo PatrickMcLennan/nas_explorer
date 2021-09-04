@@ -8,7 +8,7 @@
     "start": "next start",
     "export": "next build && next export -o html",
     "test": "jest",
-    "test:watch": "jest --weatchAll",
+    "test:watch": "jest --watchAll",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",

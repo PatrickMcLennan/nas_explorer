@@ -74,7 +74,7 @@ export const movieResolvers = {
       console.error(knexError);
       movie = {};
     }
-    console.log(movie);
+
     return movie;
   },
 

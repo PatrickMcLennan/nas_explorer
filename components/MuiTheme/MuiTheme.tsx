@@ -27,7 +27,7 @@ export default function MuiTheme({ children }: Props) {
         },
         palette: {
           primary: {
-            main: `#0097a7`,
+            main: `#FFF`,
           },
           secondary: {
             main: `#E50914`,
