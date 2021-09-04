@@ -8,6 +8,7 @@ import { nodeGraphQl } from '../clients/nodeGraphql.client';
 import { Banner } from '../components/Banner/Banner';
 import { Header } from '../components/Header/Header';
 import { MovieSwiper } from '../components/MovieSlider/MovieSlider';
+import { SEO } from '../components/SEO/SEO';
 import { Pagination, PostgresMovie } from '../types/generated.types';
 
 type Props = {
@@ -33,6 +34,11 @@ const Home: NextPage<Props> = ({ postgresMovies, pagination }: Props) => {
 
   return (
     <>
+      <SEO
+        title="NAS Netflix"
+        description="View and watch all the media on this NAS"
+        image="/not-found-background.jpeg"
+      />
       <Header />
       <Banner movie={randomMovie} />
       <MovieSwiper movies={postgresMovies.slice(0, 10)} heading="Genre Name" />
