@@ -1,8 +1,8 @@
 import { Box, Typography, makeStyles, Theme, Button } from '@material-ui/core';
 import { PostgresMovie } from '../../types/generated.types';
-import Slider from 'react-slick';
 import { formatTmdbImageUrl } from '../../lib/formatTmdbImageUrl.lib';
 import Link from 'next/link';
+import AliceCarousel from 'react-alice-carousel';
 
 type Props = {
   movies: PostgresMovie[];
@@ -33,8 +33,9 @@ export const MovieSwiper = ({ movies, heading }: Props) => {
       <Typography className={classes.heading} variant="h3" component="h3">
         {heading}
       </Typography>
-      <Slider dots={true} infinite={false} slidesToShow={5}>
-        {movies.map((movie) => (
+      <AliceCarousel
+        mouseTracking
+        items={movies.map((movie) => (
           <Link href={`/movie/${movie.id}`} key={movie.id} passHref>
             <Button className={classes.slide} component="a">
               <img
@@ -46,7 +47,12 @@ export const MovieSwiper = ({ movies, heading }: Props) => {
             </Button>
           </Link>
         ))}
-      </Slider>
+        responsive={{
+          0: {
+            items: 5.5,
+          },
+        }}
+      />
     </Box>
   );
 };

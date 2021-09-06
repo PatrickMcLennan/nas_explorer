@@ -4,8 +4,7 @@ import { browserGraphQl } from '../clients/browserGraphQl.client';
 import MuiTheme from '../components/MuiTheme/MuiTheme';
 
 import '../styles/resets.styles.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import 'react-alice-carousel/lib/alice-carousel.css';
 import { useCurrentlyPlaying } from '../stores/currentlyPlaying.store';
 import { FlyoutPlayer } from '../components/FlyoutPlayer/FlyoutPlayer';
 import { Box, CssBaseline } from '@material-ui/core';
