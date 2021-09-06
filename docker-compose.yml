@@ -10,12 +10,22 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PORT: ${POSTGRES_PORT}
 
+  redis:
+    image: redis:6.2.5-alpine
+    restart: unless-stopped
+    user: redis
+    ports:
+      - '${REDIS_PORT}:${REDIS_PORT}'
+    command: redis-server
+
   node:
     image: node:14.17.0
     restart: unless-stopped
     ports:
+      - '3000:3000'
       - '${HTTP_PORT}:${HTTP_PORT}'
     expose:
+      - '3000'
       - '${HTTP_PORT}'
     environment:
       API_GATEWAY: ${API_GATEWAY}

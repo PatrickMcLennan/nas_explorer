@@ -60,7 +60,8 @@ export const movieResolvers = {
     return { postgresMovies, pagination };
   },
 
-  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db }: { db: Knex }) => {
+  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db, redis }: { db: Knex }) => {
+    console.log(redis);
     let movie;
     try {
       await db

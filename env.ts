@@ -31,3 +31,7 @@ export const TMDB_API_KEY = process.env.TMDB_API_KEY;
 export const HTTP_PORT = process.env.HTTP_PORT;
 
 export const API_GATEWAY = process.env.API_GATEWAY;
+
+export const REDIS_PORT = process.env.REDIS_PORT;
+
+export const APPLICATION_SECRET = process.env.APPLICATION_SECRET;

@@ -107,7 +107,7 @@ export const Banner = (props: Props) => {
   }));
   const router = useRouter();
 
-  if (movie) {
+  if (movie && !!movie?.trailers?.length) {
     const [getTrailers, { loading, error, data }] = useSearchMovieTrailersByKeyValueLazyQuery({
       variables: {
         searchInput: {
