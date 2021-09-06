@@ -254,6 +254,23 @@ export type Image = {
 
 
 
+export type LoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+};
+
+export type LogoutResponse = {
+  __typename?: 'LogoutResponse';
+  message: Scalars['String'];
+};
+
 
 
 
@@ -273,6 +290,23 @@ export type MovieTrailer = {
   publishedAt?: Maybe<Scalars['Timestamp']>;
   tmdbId: Scalars['String'];
   movieId: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  registerUser?: Maybe<RegisterUserResponse>;
+  logout?: Maybe<LogoutResponse>;
+  login?: Maybe<LoginResponse>;
+};
+
+
+export type MutationRegisterUserArgs = {
+  user: RegisterUserInput;
+};
+
+
+export type MutationLoginArgs = {
+  user?: Maybe<LoginInput>;
 };
 
 
@@ -491,6 +525,19 @@ export type QuerySearchSpokenLanguagesByKeyValueArgs = {
 
 
 
+export type RegisterUserInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type RegisterUserResponse = {
+  __typename?: 'RegisterUserResponse';
+  email: Scalars['String'];
+  id: Scalars['String'];
+  name: Scalars['String'];
+};
+
 
 export type SearchCollectionsResponse = {
   __typename?: 'SearchCollectionsResponse';
@@ -557,7 +604,36 @@ export type SpokenLanguage = {
 
 
 
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String'];
+  hash: Scalars['String'];
+  createdAt: Scalars['Timestamp'];
+  updatedAt: Scalars['Timestamp'];
+  id: Scalars['String'];
+  name: Scalars['String'];
+};
 
+
+
+export type RegisterUserMutationVariables = Exact<{
+  user: RegisterUserInput;
+}>;
+
+
+export type RegisterUserMutation = { __typename?: 'Mutation', registerUser?: Maybe<{ __typename?: 'RegisterUserResponse', id: string, email: string, name: string }> };
+
+export type LoginMutationVariables = Exact<{
+  user: LoginInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login?: Maybe<{ __typename?: 'LoginResponse', id: string, email: string, name: string }> };
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = { __typename?: 'Mutation', logout?: Maybe<{ __typename?: 'LogoutResponse', message: string }> };
 
 export type GetCollectionsQueryVariables = Exact<{
   paginationInput?: Maybe<PaginationInput>;

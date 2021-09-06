@@ -6,7 +6,7 @@ export type CreateAccountDto = {
   email: string;
 };
 
-export type CreateAccountForm = {
+export type CreateAccountFormType = {
   name: string;
   password: string;
   passwordConfirm: string;
@@ -23,12 +23,14 @@ export const errorMessages = {
   noConfirm: `Confirm your password here`,
 };
 
-export const createAccountFormValidator: yup.SchemaOf<CreateAccountForm> = yup.object().shape({
+export const createAccountFormValidator: yup.SchemaOf<CreateAccountFormType> = yup.object().shape({
   name: yup.string().required(errorMessages.noName),
   email: yup.string().email(errorMessages.invalidEmail).required(errorMessages.noEmail),
   password: yup.string().min(6, errorMessages.invalidPassword).required(errorMessages.noPassword),
   passwordConfirm: yup
     .string()
+    .min(6, errorMessages.invalidPassword)
+    .required(errorMessages.noPassword)
     .oneOf([yup.ref(`password`)], errorMessages.invalidConfirm)
     .required(errorMessages.noConfirm),
 });

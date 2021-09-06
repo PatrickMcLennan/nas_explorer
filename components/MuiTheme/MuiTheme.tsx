@@ -59,15 +59,29 @@ export default function MuiTheme({ children }: Props) {
           MuiInputBase: {
             root: {
               '&, &::before': {
+                fontSize: `1.6rem`,
                 borderColor: `rgba(255, 255, 255, 0.3)`,
                 borderBottomColor: `rgba(255, 255, 255, 0.3) !important`,
+              },
+              '&:-webkit-autofill': {
+                '-webkit-box-shadow': '0 0 0 100px #000 inset',
+                '-webkit-text-fill-color': '#fff',
+                transitionDelay: `9999999s`,
               },
             },
           },
           MuiFormLabel: {
             root: {
               color: `rgba(255, 255, 255, 0.3)`,
+              fontSize: `1.6rem`,
+              opacity: 0.9,
               '&': {},
+            },
+          },
+          MuiFormHelperText: {
+            root: {
+              fontSize: `1.2rem`,
+              fontStyle: `italic`,
             },
           },
           MuiButton: {
@@ -79,7 +93,7 @@ export default function MuiTheme({ children }: Props) {
         },
       })}
     >
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       {children}
     </ThemeProvider>
   );

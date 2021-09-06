@@ -1,4 +1,4 @@
-schema: 'http://localhost:4000/api/graphql'
+schema: 'http://node:4000/api/graphql'
 documents: ./graphql/**/*.graphql
 generates:
   ./types/generated.types.ts:
@@ -10,4 +10,3 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-apollo
-exit

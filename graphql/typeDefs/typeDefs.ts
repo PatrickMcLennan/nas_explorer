@@ -1,6 +1,12 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
+  input RegisterUserInput {
+    email: String!
+    password: String!
+    name: String!
+  }
+
   input SearchInput {
     searchKey: String
     value: String
@@ -14,6 +20,11 @@ export const typeDefs = gql`
   input PaginationInput {
     offset: Int
     amount: Int
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
   }
 
   type Collection {
@@ -194,6 +205,31 @@ export const typeDefs = gql`
     pagination: Pagination
   }
 
+  type User {
+    email: String!
+    hash: String!
+    createdAt: Timestamp!
+    updatedAt: Timestamp!
+    id: String!
+    name: String!
+  }
+
+  type RegisterUserResponse {
+    email: String!
+    id: String!
+    name: String!
+  }
+
+  type LogoutResponse {
+    message: String!
+  }
+
+  type LoginResponse {
+    id: String!
+    name: String!
+    email: String!
+  }
+
   type Query {
     getCollection(id: String!): Collection
     getCollections(paginationInput: PaginationInput): GetCollectionsResponse
@@ -226,5 +262,11 @@ export const typeDefs = gql`
     getSpokenLanguage(id: String!): SpokenLanguage
     getSpokenLanguages(paginationInput: PaginationInput): GetSpokenLanguageResponse
     searchSpokenLanguagesByKeyValue(searchInput: SearchInput): SearchSpokenLanguagesResponse
+  }
+
+  type Mutation {
+    registerUser(user: RegisterUserInput!): RegisterUserResponse
+    logout: LogoutResponse
+    login(user: LoginInput): LoginResponse
   }
 `;

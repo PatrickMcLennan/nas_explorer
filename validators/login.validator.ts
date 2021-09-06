@@ -5,7 +5,7 @@ export type LoginDto = {
   password: string;
 };
 
-export type LoginForm = {
+export type LoginFormType = {
   email: string;
   password: string;
 };

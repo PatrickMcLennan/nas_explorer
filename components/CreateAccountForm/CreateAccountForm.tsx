@@ -13,10 +13,10 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
-import { LoginDto, loginValidator } from '../../validators/login.validator';
+import { CreateAccountFormType, createAccountFormValidator } from '../../validators/createAccoount.validator';
 
 type Props = {
-  onSubmit: (user: LoginDto) => any;
+  onSubmit: (formValues: CreateAccountFormType) => any;
   loading: boolean;
 };
 
@@ -41,15 +41,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function LoginForm({ onSubmit, loading }: Props) {
+export default function CreateAccountForm({ onSubmit, loading }: Props) {
   const classes = useStyles();
 
   const {
     formState: { errors },
     handleSubmit,
     control,
-  } = useForm<LoginDto>({
-    resolver: yupResolver(loginValidator),
+  } = useForm<CreateAccountFormType>({
+    resolver: yupResolver(createAccountFormValidator),
   });
 
   return (
@@ -57,8 +57,27 @@ export default function LoginForm({ onSubmit, loading }: Props) {
       className={`${classes.form} login-form`}
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit((user: LoginDto) => onSubmit(user))}
+      onSubmit={handleSubmit((formValues: CreateAccountFormType) => {
+        console.log(formValues);
+        onSubmit(formValues);
+      })}
     >
+      <Controller
+        control={control}
+        name="name"
+        render={({ field }) => {
+          const nameError = errors?.name;
+          return (
+            <FormControl error={!!nameError}>
+              <InputLabel htmlFor="name">Name</InputLabel>
+              <Input {...field} id="name" type="text" />
+              <FormHelperText className={classes.formHelperText} aria-hidden={!nameError}>
+                {nameError ? nameError.message : ` `}
+              </FormHelperText>
+            </FormControl>
+          );
+        }}
+      />
       <Controller
         control={control}
         name="email"
@@ -91,16 +110,32 @@ export default function LoginForm({ onSubmit, loading }: Props) {
           );
         }}
       />
+      <Controller
+        control={control}
+        name="passwordConfirm"
+        render={({ field }) => {
+          const passwordConfirmError = errors.passwordConfirm;
+          return (
+            <FormControl error={!!passwordConfirmError}>
+              <InputLabel htmlFor="passwordConfirm">Confirm Password</InputLabel>
+              <Input {...field} id="passwordConfirm" type="password" />
+              <FormHelperText className={classes.formHelperText} aria-hidden={!passwordConfirmError}>
+                {passwordConfirmError ? passwordConfirmError.message : ` `}
+              </FormHelperText>
+            </FormControl>
+          );
+        }}
+      />
       {loading ? (
         <CircularProgress />
       ) : (
         <Button className={classes.submit} type="submit">
-          Log In
+          Register
         </Button>
       )}
-      <Link href="/create-account" passHref>
+      <Link href="/login" passHref>
         <Typography className={classes.createLink} component={MuiLink}>
-          New to NAS Netflix? Create an account here.
+          Already have an account? Log In here.
         </Typography>
       </Link>
     </form>

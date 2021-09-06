@@ -6,6 +6,7 @@ import { movieTrailerResolvers } from './movieTrailers.resolvers';
 import { productionCompanyResolvers } from './productionCompanies.resolvers';
 import { productionCountryResolvers } from './productionCountries.resolvers';
 import { spokenLangaugeResolvers } from './spokenLanguageResolvers';
+import { userMutations } from './users.resolvers';
 
 export const resolvers = {
   Query: {
@@ -17,5 +18,8 @@ export const resolvers = {
     ...productionCompanyResolvers,
     ...productionCountryResolvers,
     ...spokenLangaugeResolvers,
+  },
+  Mutation: {
+    ...userMutations,
   },
 };

@@ -32,7 +32,7 @@ export default function PlayMovie({ movie }: PageProps) {
           width="100vw"
           height="100vh"
           volume={1}
-          play
+          play="true"
           config={{
             file: {
               // forceAudio: true,

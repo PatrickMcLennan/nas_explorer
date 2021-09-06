@@ -11,7 +11,7 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
 
   redis:
-    image: redis:6.2.5-alpine
+    image: redis:6.2.5
     restart: unless-stopped
     user: redis
     ports:

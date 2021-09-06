@@ -23,7 +23,6 @@ export default function CollectionPage({ collection }: Props) {
         image={collection?.posterPath ?? collection?.backdropPath ?? `/not-found-background.jpeg`}
       />
       <Box>
-        <Header />
         <Banner collection={collection} />
       </Box>
     </>

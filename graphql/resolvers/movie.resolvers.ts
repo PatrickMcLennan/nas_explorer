@@ -8,6 +8,7 @@ import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
 import { validateSearchParams } from '../../lib/serverSearch';
 import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
+import { GraphQLContext } from '../../types/graphqlContext.types';
 
 export const movieResolvers = {
   getDynamoMovies: async () => {
@@ -25,7 +26,8 @@ export const movieResolvers = {
     return dynamoMovies;
   },
 
-  getPostgresMovies: async (_: any, { paginationInput }: any, { db }: { db: Knex }) => {
+  getPostgresMovies: async (_: any, { paginationInput }: any, { db, redis }: GraphQLContext) => {
+    console.log(redis);
     let postgresMovies!: PostgresMovie[];
     let pagination: Pagination = {
       total: NaN,
@@ -60,7 +62,7 @@ export const movieResolvers = {
     return { postgresMovies, pagination };
   },
 
-  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db, redis }: { db: Knex }) => {
+  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db, redis }: GraphQLContext) => {
     console.log(redis);
     let movie;
     try {

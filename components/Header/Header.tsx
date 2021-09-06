@@ -9,6 +9,7 @@ import {
   Input,
   InputAdornment,
   IconButton,
+  Button,
 } from '@material-ui/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -19,6 +20,8 @@ import { useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useUser } from '../../stores/user.store';
+import { useLogoutMutation } from '../../hooks/generated.hooks';
 
 type SearchForm = {
   searchText: string;
@@ -66,6 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Header = () => {
   const classes = useStyles();
   const router = useRouter();
+  const { user, setUser } = useUser(({ user, setUser }) => ({ user, setUser }));
   let debounce = useRef<any>();
   const { control, handleSubmit } = useForm<SearchForm>({
     defaultValues: {
@@ -81,6 +85,13 @@ export const Header = () => {
 
   const search = () => router.push(`/search?title=${searchValues}`);
 
+  const [logoutMutation] = useLogoutMutation({
+    onCompleted: () => {
+      setUser(null);
+      router.push(`/login`);
+    },
+  });
+
   useEffect(() => {
     clearTimeout(debounce.current);
     if (searchValues) {
@@ -95,78 +106,83 @@ export const Header = () => {
         <img className={classes.logo} src="/netflixLogo.png" alt="Netflix Logo" title="Return to home page" />
       </Link>
       <Box component="nav">
-        <List className={classes.list}>
-          <ListItem>
-            <Link href="/" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                Home
-              </Typography>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="/tv-shows" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                TV Shows
-              </Typography>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="/movies" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                Movies
-              </Typography>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="/collections" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                Collections
-              </Typography>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="/new-popular" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                New &amp; Popular
-              </Typography>
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link href="/my-list" passHref>
-              <Typography className={classes.link} component={MuiLink} noWrap>
-                My List
-              </Typography>
-            </Link>
-          </ListItem>
-        </List>
+        {user && (
+          <List className={classes.list}>
+            <ListItem>
+              <Link href="/" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  Home
+                </Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/tv-shows" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  TV Shows
+                </Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/movies" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  Movies
+                </Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/collections" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  Collections
+                </Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/new-popular" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  New &amp; Popular
+                </Typography>
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="/my-list" passHref>
+                <Typography className={classes.link} component={MuiLink} noWrap>
+                  My List
+                </Typography>
+              </Link>
+            </ListItem>
+          </List>
+        )}
       </Box>
-      <motion.form
-        autoComplete="off"
-        className={classes.form}
-        onSubmit={handleSubmit(search)}
-        animate={formExpanded ? `open` : `closed`}
-        variants={formAnimationStates}
-        onHoverStart={() => setFormExpanded(true)}
-        onHoverEnd={() => setFormExpanded(!!searchValues.length)}
-      >
-        <Controller
-          name="searchText"
-          control={control}
-          render={({ field }) => (
-            <Input
-              {...field}
-              className={classes.input}
-              startAdornment={
-                <InputAdornment position="start">
-                  <IconButton type="submit" color="primary" edge="start">
-                    <SearchIcon fontSize="large" />
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          )}
-        />
-      </motion.form>
+      {user && (
+        <motion.form
+          autoComplete="off"
+          className={classes.form}
+          onSubmit={handleSubmit(search)}
+          animate={formExpanded ? `open` : `closed`}
+          variants={formAnimationStates}
+          onHoverStart={() => setFormExpanded(true)}
+          onHoverEnd={() => setFormExpanded(!!searchValues.length)}
+        >
+          <Controller
+            name="searchText"
+            control={control}
+            render={({ field }) => (
+              <Input
+                {...field}
+                className={classes.input}
+                startAdornment={
+                  <InputAdornment position="start">
+                    <IconButton type="submit" color="primary" edge="start">
+                      <SearchIcon fontSize="large" />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            )}
+          />
+        </motion.form>
+      )}
+      {user && <Button onClick={() => logoutMutation()}>Logout</Button>}
     </Box>
   );
 };

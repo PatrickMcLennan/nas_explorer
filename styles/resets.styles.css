@@ -5,3 +5,15 @@ html {
 body {
   position: relative;
 }
+
+#__next {
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.global-main {
+  flex: 1;
+}

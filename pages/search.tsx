@@ -33,6 +33,10 @@ export default function SearchPage() {
       searchInput: {
         searchKey: `title`,
         value: query?.title?.toString?.() ?? ``,
+        paginationInput: {
+          offset: 0,
+          amount: 25,
+        },
       },
     },
     onCompleted: ({ searchPostgresMoviesByKeyValue }) =>
@@ -45,7 +49,6 @@ export default function SearchPage() {
   return (
     <>
       <SEO title="Search | " description="Search for your favourite content" image="/not-found-background.jpeg" />
-      <Header />
       <Grid container spacing={1}>
         {postgresMovies.map((movie) => (
           <Grid item lg={2} key={movie.id}>

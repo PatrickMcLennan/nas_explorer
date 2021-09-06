@@ -35,7 +35,6 @@ const Home: NextPage<Props> = ({ postgresMovies, pagination }: Props) => {
   return (
     <>
       <SEO title="" description="View and watch all the media on this NAS" image="/not-found-background.jpeg" />
-      <Header />
       <Banner movie={randomMovie} />
       <MovieSwiper movies={postgresMovies.slice(0, 10)} heading="Genre Name" />
     </>

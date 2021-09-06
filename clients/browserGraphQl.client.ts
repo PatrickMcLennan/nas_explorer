@@ -1,6 +1,9 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 
 export const browserGraphQl = new ApolloClient({
-  uri: `/api/graphql`,
   cache: new InMemoryCache(),
+  link: createHttpLink({
+    uri: process.env.NODE_ENV === `production` ? `/api/graphql` : `http://localhost:4000/api/graphql`,
+    credentials: `include`, // TODO: I think this is a problem
+  }),
 });

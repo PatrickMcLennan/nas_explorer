@@ -6,4 +6,5 @@ export enum Tables {
   PRODUCTION_COMPANIES = 'production_companies',
   COLLECTIONS = 'collections',
   MOVIE_TRAILERS = 'movie_trailers',
+  USERS = 'users',
 }

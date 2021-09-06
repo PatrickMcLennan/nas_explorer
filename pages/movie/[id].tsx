@@ -24,7 +24,6 @@ export default function Movie({ movie }: PageProps) {
         image={movie?.posterPath ?? movie?.backdropPath ?? `/not-found-background.jpeg`}
       />
       <Box>
-        <Header />
         <Banner movie={movie} />
         {movie.title}
         {movie.tmdbId}

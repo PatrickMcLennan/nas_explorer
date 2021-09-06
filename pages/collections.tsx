@@ -66,7 +66,6 @@ export default function Collections({ collections, pagination }: Props) {
     <>
       <SEO title="Collections | " description="View all movie collections" image="/not-found-background.jpeg" />
       <Box>
-        <Header />
         <Banner collection={randomCollection} />
         <Box className={classes.container}>
           <Typography className={classes.heading} variant="h3" component="h3">
