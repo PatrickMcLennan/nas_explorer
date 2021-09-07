@@ -35,3 +35,5 @@ export const API_GATEWAY = process.env.API_GATEWAY;
 export const REDIS_PORT = process.env.REDIS_PORT;
 
 export const APPLICATION_SECRET = process.env.APPLICATION_SECRET;
+
+export const NGINX_PORT = process.env.NGINX_PORT;
