@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+if [ "main" == "$branch" ]; then
+  npm run jest
+else
+  echo
+  echo Husky not running -- unit tests are only ran when pushing on main
+  echo
+  exit 0
+fi
