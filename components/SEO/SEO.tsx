@@ -22,7 +22,8 @@ export function SEO({ title, description, image }: Props) {
       {image && <meta property="og:image" content={image} />}
       {image && <meta property="twitter:image" content={image} />}
       <meta property="og:url" content="PERMALINK" />
-      <meta property="og:site_name" content="SITE NAME" />
+      {/* TODO -- Return to this ^^ when url is sorted */}
+      <meta property="og:site_name" content="NAS Netflix" />
     </Head>
   );
 }

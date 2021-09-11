@@ -4,19 +4,24 @@ import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
 import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
 import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
-import { validateSearchParams } from '../../lib/serverSearch';
-import { MovieTrailer, Pagination } from '../../types/generated.types';
+import { validateSearchParams } from '../../lib/validateSearchParams';
+import { MovieTrailer, Pagination, PaginationInput } from '../../types/generated.types';
+import { GraphQLContext } from '../../types/graphqlContext.types';
 import { Tables } from '../../types/tables.enum';
 
 export const movieTrailerResolvers = {
-  getMovieTrailers: async (_: any, { paginationInput }: any, { db }: { db: Knex }) => {
+  getMovieTrailers: async (
+    _: any,
+    { paginationInput }: { paginationInput: PaginationInput },
+    { db }: GraphQLContext
+  ) => {
     let movieTrailers: MovieTrailer[];
     let pagination: Pagination = {
       total: NaN,
     };
 
-    const offset = paginationInput?.offset;
-    const amount = paginationInput?.amount;
+    const offset = paginationInput?.offset ?? NaN;
+    const amount = paginationInput?.amount ?? NaN;
 
     const { valid, errors, messages } = validatePagination({ offset, amount });
     if (!valid) {
@@ -44,7 +49,7 @@ export const movieTrailerResolvers = {
     return { movieTrailers, pagination };
   },
 
-  getMovieTrailer: async (_: any, { id }: any, { db }: { db: Knex }) => {
+  getMovieTrailer: async (_: any, { id }: any, { db }: GraphQLContext) => {
     let movieTrailer;
 
     try {

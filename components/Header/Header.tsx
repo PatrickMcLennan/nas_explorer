@@ -16,11 +16,10 @@ import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
 import SearchIcon from '@material-ui/icons/Search';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { useRef } from 'react';
 import { useEffect } from 'react';
-import { useUser } from '../../stores/user.store';
 import { useLogoutMutation } from '../../hooks/generated.hooks';
 
 type SearchForm = {
@@ -69,8 +68,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Header = () => {
   const classes = useStyles();
   const router = useRouter();
-  const { user, setUser } = useUser(({ user, setUser }) => ({ user, setUser }));
-  let debounce = useRef<any>();
   const { control, handleSubmit } = useForm<SearchForm>({
     defaultValues: {
       searchText: router?.query?.title?.toString?.() ?? ``,
@@ -82,14 +79,13 @@ export const Header = () => {
     defaultValue: router?.query?.title?.toString?.() ?? ``,
   });
   const [formExpanded, setFormExpanded] = useState<boolean>(!!searchValues.length);
+  let debounce = useRef<any>();
 
-  const search = () => router.push(`/search?title=${searchValues}`);
+  const search = useCallback(() => router.push(`/search?title=${searchValues}`), [router]);
+  const user = useMemo(() => router.route !== `/login` && router.route !== `/create-account`, [router.route]);
 
   const [logoutMutation] = useLogoutMutation({
-    onCompleted: () => {
-      setUser(null);
-      router.push(`/login`);
-    },
+    onCompleted: () => router.push(`/login`),
   });
 
   useEffect(() => {
@@ -103,7 +99,9 @@ export const Header = () => {
   return (
     <Box className={classes.header} component="header">
       <Link href="/">
-        <img className={classes.logo} src="/netflixLogo.png" alt="Netflix Logo" title="Return to home page" />
+        <a title="Return to homepage">
+          <img className={classes.logo} src="/netflixLogo.png" alt="Netflix Logo" title="Return to home page" />
+        </a>
       </Link>
       <Box component="nav">
         {user && (
@@ -170,6 +168,9 @@ export const Header = () => {
               <Input
                 {...field}
                 className={classes.input}
+                inputProps={{
+                  title: 'What are you looking for?',
+                }}
                 startAdornment={
                   <InputAdornment position="start">
                     <IconButton type="submit" color="primary" edge="start">

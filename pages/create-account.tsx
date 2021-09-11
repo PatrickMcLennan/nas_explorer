@@ -61,7 +61,7 @@ export default function CreateAccount() {
   const router = useRouter();
   const { setUser } = useUser(({ setUser }) => ({ setUser }));
 
-  const [registerUser, { data, loading, error }] = useRegisterUserMutation({
+  const [registerUser, { loading, error }] = useRegisterUserMutation({
     onCompleted: ({ registerUser }: RegisterUserMutation) => {
       setUser({
         id: registerUser?.id ?? ``,

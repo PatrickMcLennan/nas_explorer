@@ -5,7 +5,7 @@ import { Pagination, PostgresMovie, QueryGetPostgresMovieArgs } from '../../type
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
 import { UserInputError } from 'apollo-server-express';
 import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
-import { validateSearchParams } from '../../lib/serverSearch';
+import { validateSearchParams } from '../../lib/validateSearchParams';
 import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
 import { GraphQLContext } from '../../types/graphqlContext.types';
@@ -26,8 +26,7 @@ export const movieResolvers = {
     return dynamoMovies;
   },
 
-  getPostgresMovies: async (_: any, { paginationInput }: any, { db, redis }: GraphQLContext) => {
-    console.log(redis);
+  getPostgresMovies: async (_: any, { paginationInput }: any, { db }: GraphQLContext) => {
     let postgresMovies!: PostgresMovie[];
     let pagination: Pagination = {
       total: NaN,
@@ -62,8 +61,7 @@ export const movieResolvers = {
     return { postgresMovies, pagination };
   },
 
-  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db, redis }: GraphQLContext) => {
-    console.log(redis);
+  getPostgresMovie: async (_: any, { id }: QueryGetPostgresMovieArgs, { db }: GraphQLContext) => {
     let movie;
     try {
       await db

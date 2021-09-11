@@ -9,7 +9,6 @@ import { useCurrentlyPlaying } from '../../stores/currentlyPlaying.store';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
 type Props = {
@@ -100,15 +99,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Banner = (props: Props) => {
   const { movie, collection } = props;
   const classes = useStyles();
-  const { setCurrentlyPlaying, url, id } = useCurrentlyPlaying(({ setCurrentlyPlaying, url, id }) => ({
-    setCurrentlyPlaying,
-    url,
-    id,
-  }));
+  const { setCurrentlyPlaying } = useCurrentlyPlaying(({ setCurrentlyPlaying }) => ({ setCurrentlyPlaying }));
   const router = useRouter();
 
   if (movie && !!movie?.trailers?.length) {
-    const [getTrailers, { loading, error, data }] = useSearchMovieTrailersByKeyValueLazyQuery({
+    const [getTrailers, { data }] = useSearchMovieTrailersByKeyValueLazyQuery({
       variables: {
         searchInput: {
           searchKey: `movieId`,

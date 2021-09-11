@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
 import type { LoginDto } from '../../validators/login.validator';
 import { loginValidator } from '../../validators/login.validator';
+
 export const userMutations = {
   registerUser: async (_: any, { user }: { user: CreateAccountDto }, { db, request }: GraphQLContext) => {
     const postgresUser = await db.select(`*`).from(Tables.USERS).where({ email: user.email });
@@ -42,7 +43,7 @@ export const userMutations = {
   login: async (_: any, { user }: { user: LoginDto }, { request, db }: GraphQLContext) => {
     const validForm = await loginValidator.isValid(user);
     if (!validForm) {
-      return new UserInputError(`Invalid attempt`);
+      return new UserInputError(`Invalid email or password`);
     }
 
     const postgresUser = await db.table(Tables.USERS).where({ email: user.email });

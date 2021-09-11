@@ -4,19 +4,24 @@ import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
 import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
 import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
-import { validateSearchParams } from '../../lib/serverSearch';
-import { Genre, GetGenresResponse, Pagination } from '../../types/generated.types';
+import { validateSearchParams } from '../../lib/validateSearchParams';
+import { Genre, GetGenresResponse, Pagination, PaginationInput } from '../../types/generated.types';
+import { GraphQLContext } from '../../types/graphqlContext.types';
 import { Tables } from '../../types/tables.enum';
 
 export const genresResolvers = {
-  getGenres: async (_: any, { paginationInput }: any, { db }: { db: Knex }): Promise<GetGenresResponse> => {
+  getGenres: async (
+    _: any,
+    { paginationInput }: { paginationInput: PaginationInput },
+    { db }: GraphQLContext
+  ): Promise<GetGenresResponse> => {
     let genres!: Genre[];
     let pagination: Pagination = {
       total: NaN,
     };
 
-    const offset = paginationInput?.offset;
-    const amount = paginationInput?.amount;
+    const offset = paginationInput?.offset ?? NaN;
+    const amount = paginationInput?.amount ?? NaN;
 
     const { valid, errors, messages } = validatePagination({ offset, amount });
     if (!valid) {

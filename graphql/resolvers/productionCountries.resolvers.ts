@@ -4,7 +4,7 @@ import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
 import { paginatedDbSEARCH } from '../../lib/paginatedDbSEARCH.lib';
 import { serverErrorReducer } from '../../lib/serverErrorReducer.lib';
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
-import { validateSearchParams } from '../../lib/serverSearch';
+import { validateSearchParams } from '../../lib/validateSearchParams';
 import { Pagination, ProductionCountry } from '../../types/generated.types';
 import { Tables } from '../../types/tables.enum';
 

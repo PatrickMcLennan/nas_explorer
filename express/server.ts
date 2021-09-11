@@ -1,12 +1,10 @@
 import express from 'express';
-import cors from 'cors';
 import morgan from 'morgan';
 import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import { typeDefs } from '../graphql/typeDefs/typeDefs';
 import { resolvers } from '../graphql/resolvers/resolvers';
 import fs from 'fs';
 import { APPLICATION_SECRET, HTTP_PORT, REDIS_PORT } from '../env';
-import https from 'https';
 import session from 'express-session';
 import Knex from '../postgres/knex';
 import path from 'path';
@@ -36,9 +34,8 @@ const redisClient = redis.createClient({
 async function startServer() {
   const app = express();
 
-  app.set('trust proxy', 1); // nginx or something gets in the mix
+  app.set('trust proxy', 1);
   app.use(morgan(`:method :url :status :res[content-length] - :response-time ms`));
-  app.use(express.static(path.resolve(__dirname, `../../html`), { extensions: [`html`] }));
 
   app.use(
     session({
@@ -78,7 +75,7 @@ async function startServer() {
 
   server.applyMiddleware({ app, path: `/api/graphql`, cors: corsOptions });
 
-  app.use((req, res, next) => {
+  app.use((_, res, next) => {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', `http://localhost:3000`); // TODO: what about prod?
     // Request methods you wish to allow

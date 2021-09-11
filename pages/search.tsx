@@ -1,7 +1,6 @@
 import { Button, Grid, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Header } from '../components/Header/Header';
 import { SEO } from '../components/SEO/SEO';
 import { useSearchPostgresMoviesByKeyValueQuery } from '../hooks/generated.hooks';
 import { Pagination, PostgresMovie } from '../types/generated.types';
