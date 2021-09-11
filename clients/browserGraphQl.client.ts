@@ -5,5 +5,5 @@ export const browserGraphQl = new ApolloClient({
   link: createHttpLink({
     uri: process.env.NODE_ENV === `production` ? `/api/graphql` : `http://localhost:4000/api/graphql`,
     credentials: `include`,
-  }),
-});
+  } as const),
+} as const);

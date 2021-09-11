@@ -1,5 +1,6 @@
 import type { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk';
+import { DynamoTables } from '../../types/dynamoTables.enum';
 
 const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
   let sentImages;
@@ -25,7 +26,7 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
   try {
     currentImages = await new DynamoDB()
       .scan({
-        TableName: `nas_media`,
+        TableName: DynamoTables.MEDIA,
         FilterExpression: `mediaType = :image`,
         ExpressionAttributeValues: {
           ':image': {

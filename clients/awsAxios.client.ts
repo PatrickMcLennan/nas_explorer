@@ -3,4 +3,4 @@ import { API_GATEWAY } from '../env';
 
 export const awsAxiosClient = axios.create({
   baseURL: API_GATEWAY,
-});
+} as const);

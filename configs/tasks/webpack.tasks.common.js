@@ -10,6 +10,7 @@ module.exports = {
   entry: {
     imageAwsDump: path.resolve(__dirname, `../../tasks/imageAwsDump.ts`),
     movieAwsDump: path.resolve(__dirname, `../../tasks/movieAwsDump.ts`),
+    dumpExistingPostgresBackup: path.resolve(__dirname, `../../tasks/dumpExistingPostgresBackup.ts`),
   },
   externals: [nodeExternals()],
 

@@ -1,5 +1,6 @@
 import type { APIGatewayProxyResultV2 } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk';
+import { DynamoTables } from '../../types/dynamoTables.enum';
 
 const handler = async (): Promise<APIGatewayProxyResultV2> => {
   let currentMovies;
@@ -7,7 +8,7 @@ const handler = async (): Promise<APIGatewayProxyResultV2> => {
   try {
     currentMovies = await new DynamoDB()
       .scan({
-        TableName: `nas_media`,
+        TableName: DynamoTables.MEDIA,
         FilterExpression: `mediaType = :movie`,
         ExpressionAttributeValues: {
           ':movie': {

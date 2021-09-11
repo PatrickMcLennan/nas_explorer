@@ -1,4 +1,4 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
 import React from 'react';
 

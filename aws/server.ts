@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import * as cdk from '@aws-cdk/core';
-import { Stack } from './stack';
+import { App } from '@aws-cdk/core';
+import { NasMediaStack } from './stack';
 
-const app = new cdk.App();
-new Stack(app, 'Stack');
+const app = new App();
+new NasMediaStack(app, 'NasMediaStack');

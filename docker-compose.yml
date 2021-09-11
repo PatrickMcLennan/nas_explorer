@@ -9,6 +9,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PORT: ${POSTGRES_PORT}
+    working_dir: /app
+    volumes:
+      - ./:/app
 
   redis:
     image: redis:6.2.5
@@ -33,7 +36,7 @@ services:
 
   node:
     image: node:14.17.0
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - '3000:3000'
       - '${HTTP_PORT}:${HTTP_PORT}'
@@ -59,7 +62,7 @@ services:
       - nginx
       - redis
       - postgres
-    command: npx pm2-runtime start pm2.config.js
+    command: bash -c "npm run compile:all:prod && npx pm2-runtime start pm2.config.js"
     working_dir: /app
     volumes:
       - ./:/app

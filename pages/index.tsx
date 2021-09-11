@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { nodeGraphQl } from '../clients/nodeGraphql.client';
 import { Banner } from '../components/Banner/Banner';
-import { Header } from '../components/Header/Header';
 import { MovieSwiper } from '../components/MovieSlider/MovieSlider';
 import { SEO } from '../components/SEO/SEO';
 import { Pagination, PostgresMovie } from '../types/generated.types';
