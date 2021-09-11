@@ -44,14 +44,16 @@ aws/@eadir/
 components/@eadir/
 configs/@eadir/
 graphql/@eadir/
-express/dist/**/*.js
-aws/dist/*
+aws/dist
 clients/**/*.js
 pages/**/*.js
 validators/**/*.js
 html/
 tasks/dist/
+express/dist
 cdk.out/
 
 express/selfsigned.crt
 express/selfsigned.key
+
+**/*.gz

@@ -25,7 +25,7 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
   try {
     currentImages = await new DynamoDB()
       .scan({
-        TableName: `nas_media`,
+        TableName: `nas_media_dynamo`,
         FilterExpression: `mediaType = :image`,
         ExpressionAttributeValues: {
           ':image': {

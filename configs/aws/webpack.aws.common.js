@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 'use strict';
 
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   target: 'node',
-  context: __dirname,
   entry: {
     server: path.resolve(__dirname, `../../aws/server.ts`),
     stack: path.resolve(__dirname, `../../aws/stack.ts`),
@@ -13,8 +12,13 @@ module.exports = {
     postImages: path.resolve(__dirname, `../../aws/lambdas/postImages.ts`),
     getMovies: path.resolve(__dirname, `../../aws/lambdas/getMovies.ts`),
     postMovies: path.resolve(__dirname, `../../aws/lambdas/postMovies.ts`),
+    presignedUrl: path.resolve(__dirname, `../../aws/lambdas/presignedUrl.ts`),
   },
-  // externals: [nodeExternals()],
+  externals: {
+    'aws-sdk': 'aws-sdk',
+    '/tmp/node_modules/aws-sdk': 'aws-sdk',
+    ...nodeExternals(),
+  },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../../aws/dist'),
@@ -22,12 +26,12 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.ts', '.js', '.mjs'],
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.ts?$/,
         loader: 'swc-loader',
       },
     ],
