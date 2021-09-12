@@ -3,10 +3,10 @@
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 if [ "main" == "$branch" ]; then
-  npm run lint
-  npm run jest
-  npm run compile:all:prod
-  npm run export:next
+  docker exec house_media_new_node_1 npm run lint
+  # docker exec house_media_new_node_1 npm run jest
+  # docker exec house_media_new_node_1 npm run compile:all:prod
+  # docker exec house_media_new_node_1 npm run export:next
 else
   echo
   echo Husky not running -- unit tests are only ran when pushing on main
