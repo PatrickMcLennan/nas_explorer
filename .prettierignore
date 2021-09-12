@@ -1,5 +1,8 @@
 aws/dist/
 express/dist/
-
+tasks/dist/
 hooks/generated.hooks.tsx
 types/generated.types.ts
+.cdk
+.next/
+**/*.mjs

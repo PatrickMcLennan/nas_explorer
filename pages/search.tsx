@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 export default function SearchPage() {
   const { query } = useRouter();
   const classes = useStyles();
-  const [{ postgresMovies, pagination }, setResults] = useState<State>({
+  const [{ postgresMovies }, setResults] = useState<State>({
     postgresMovies: [],
     pagination: {
       total: NaN,

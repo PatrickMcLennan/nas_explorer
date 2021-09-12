@@ -7,7 +7,7 @@ import { useRegisterUserMutation } from '../hooks/generated.hooks';
 import { CreateAccountFormType } from '../validators/createAccoount.validator';
 import { useRouter } from 'next/router';
 import { useUser } from '../stores/user.store';
-import { RegisterUserMutation, User } from '../types/generated.types';
+import { RegisterUserMutation } from '../types/generated.types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   alert: {

@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { CreateAccountFormType, createAccountFormValidator } from '../../validators/createAccoount.validator';
 
 type Props = {
-  onSubmit: (formValues: CreateAccountFormType) => any;
+  onSubmit: (_: CreateAccountFormType) => any;
   loading: boolean;
 };
 

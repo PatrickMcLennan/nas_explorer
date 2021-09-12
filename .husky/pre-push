@@ -1,15 +1,31 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+format_message () {
+  echo
+  echo "$1"
+  echo
+}
+
 branch=$(git rev-parse --abbrev-ref HEAD)
 if [ "main" == "$branch" ]; then
-  npm run lint
-  npm run jest
-  npm run compile:all:prod
-  npm run export:next
+  format_message "Formatting all files . . ."
+  docker exec house_media_new_node_1 npm run format:all;
+
+  format_message "Linting all files . . ."
+  docker exec house_media_new_node_1 npm run lint;
+
+  format_message "Running unit tests . . ."
+  docker exec house_media_new_node_1 npm run jest
+
+  format_message "Compiling all TypeScript . . ."
+  docker exec house_media_new_node_1 npm run compile:all:prod
+
+  format_message "Compiling static markup . . ."
+  docker exec house_media_new_node_1 npm run export:next
+
 else
-  echo
-  echo Husky not running -- unit tests are only ran when pushing on main
-  echo
+  format_message "Husky not running -- unit tests are only ran when pushing on main"
   exit 0
 fi
+exit 0;
