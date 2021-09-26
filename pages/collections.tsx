@@ -6,7 +6,6 @@ import { useCallback } from 'react';
 import { useState } from 'react';
 import { nodeGraphQl } from '../clients/nodeGraphql.client';
 import { Banner } from '../components/Banner/Banner';
-import { Header } from '../components/Header/Header';
 import { Collection, GetCollectionsQuery, Pagination } from '../types/generated.types';
 import Link from 'next/link';
 import { formatTmdbImageUrl } from '../lib/formatTmdbImageUrl.lib';

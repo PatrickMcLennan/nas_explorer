@@ -1,13 +1,13 @@
-import { Button, makeStyles, Theme } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 type Props = {
-  onClick: (...props: any) => any;
+  onClick: (_: any) => any;
   accent: boolean;
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   button: {
     fontSize: `1.6rem`,
     lineHeight: `3rem`,

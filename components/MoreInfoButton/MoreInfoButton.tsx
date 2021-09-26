@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import InfoIcon from '@material-ui/icons/Info';
 
 type Props = {
-  onClick: (...props: any) => any;
+  onClick: (_: any) => any;
   accent: boolean;
   className?: string;
 };
