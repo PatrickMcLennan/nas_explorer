@@ -15,6 +15,7 @@ import { ServerRoutes } from '../types/serverRoutes.enum';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
 import { GraphQLContext } from '../types/graphqlContext.types';
+import cors from 'cors';
 
 const corsOptions = {
   origin: `http://localhost:3000`, // TODO: what about prod?
@@ -73,11 +74,12 @@ async function startServer() {
 
   await server.start();
 
-  server.applyMiddleware({ app, path: `/api/graphql`, cors: corsOptions });
+  server.applyMiddleware({ app, path: `/api/graphql`, cors: false });
 
   app.use((_, res, next) => {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', `http://localhost:3000`); // TODO: what about prod?
+    res.setHeader('Access-Control-Allow-Origin', `https://studio.apollographql.com`);
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -90,6 +92,7 @@ async function startServer() {
     next();
   });
 
+  // app.use(cors(corsOptions));
   app.listen({ port: HTTP_PORT }, () => console.log(`App is listening on Port ${HTTP_PORT}`));
 }
 

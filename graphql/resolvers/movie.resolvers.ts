@@ -29,7 +29,7 @@ export const movieResolvers = {
   getPostgresMovies: async (_: any, { paginationInput }: any, { db }: GraphQLContext) => {
     let postgresMovies!: PostgresMovie[];
     let pagination: Pagination = {
-      total: NaN,
+      total: 0,
     };
 
     const offset = paginationInput?.offset;

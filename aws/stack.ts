@@ -62,6 +62,7 @@ export class NasMediaStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset(`./aws/dist`),
       handler: `postImages.handler`,
+      functionName: `nas_media_post_images`,
     });
     images.addMethod(`POST`, new apiGateway.LambdaIntegration(postImagesHandler));
 
@@ -69,6 +70,7 @@ export class NasMediaStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset(`./aws/dist`),
       handler: `getMovies.handler`,
+      functionName: `nas_media_get_movies`,
     });
     movies.addMethod(`GET`, new apiGateway.LambdaIntegration(getMoviesHandler));
 
@@ -76,6 +78,7 @@ export class NasMediaStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset(`./aws/dist`),
       handler: `postMovies.handler`,
+      functionName: `nas_media_post_movies`,
     });
     movies.addMethod(`POST`, new apiGateway.LambdaIntegration(postMoviesHandler));
 
@@ -83,6 +86,7 @@ export class NasMediaStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset(`./aws/dist`),
       handler: `presignedUrl.handler`,
+      functionName: `nas_media_post_presigned_url`,
     });
     presignedUrl.addMethod(`POST`, new apiGateway.LambdaIntegration(postPresignedUrlHandler));
 
