@@ -20,6 +20,7 @@ if [ "main" == "$branch" ]; then
 
   format_message "Compiling all TypeScript . . ."
   docker exec house_media_new_node_1 npm run compile:all:prod
+  docker exec house_media_new_node_1 npm run compile:express:dev
 
   format_message "Compiling static markup . . ."
   docker exec house_media_new_node_1 npm run export:next

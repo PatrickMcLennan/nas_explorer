@@ -74,24 +74,26 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
     return new DynamoDB()
       .batchWriteItem({
         RequestItems: {
-          nas_media: newMovies.slice(0, 25).map(({ tmdbId, title }: { tmdbId: string; title: string }) => ({
-            PutRequest: {
-              Item: {
-                id: {
-                  S: uuidv4(),
-                },
-                mediaType: {
-                  S: `movie`,
-                },
-                tmdbId: {
-                  S: tmdbId,
-                },
-                title: {
-                  S: title,
+          [`${DynamoTables.MEDIA}`]: newMovies
+            .slice(0, 25)
+            .map(({ tmdbId, title }: { tmdbId: string; title: string }) => ({
+              PutRequest: {
+                Item: {
+                  id: {
+                    S: uuidv4(),
+                  },
+                  mediaType: {
+                    S: `movie`,
+                  },
+                  tmdbId: {
+                    S: tmdbId,
+                  },
+                  title: {
+                    S: title,
+                  },
                 },
               },
-            },
-          })),
+            })),
         },
       })
       .promise()

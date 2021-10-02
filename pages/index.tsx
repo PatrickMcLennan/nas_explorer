@@ -46,21 +46,6 @@ export const getStaticProps = async () =>
   nodeGraphQl
     .request(
       gql`
-        query getGenres {
-          getGenres {
-            genres {
-              id
-              createdAt
-              updatedAt
-              tmdbId
-              name
-            }
-          }
-        }
-      `
-    )
-    .then(({ getGenres }) => {
-      return nodeGraphQl.request(gql`
         query getPostgresMovies {
           getPostgresMovies {
             postgresMovies {
@@ -102,8 +87,8 @@ export const getStaticProps = async () =>
             }
           }
         }
-      `);
-    })
+      `
+    )
     .then(({ getPostgresMovies }) => {
       return {
         props: {
@@ -111,4 +96,5 @@ export const getStaticProps = async () =>
           pagination: getPostgresMovies.pagination,
         },
       };
-    });
+    })
+    .catch((err) => console.error(err));

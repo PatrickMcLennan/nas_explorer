@@ -14,7 +14,7 @@ const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyRe
     };
   }
 
-  if (!sentImages || !sentImages.length) {
+  if (!sentImages || !sentImages?.length) {
     return {
       statusCode: 400,
       body: `No images were sent`,
