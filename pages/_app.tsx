@@ -1,10 +1,10 @@
-import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
+import { ApolloProvider } from '@apollo/client';
 import { browserGraphQl } from '../clients/browserGraphQl.client';
 import MuiTheme from '../components/MuiTheme/MuiTheme';
 
 import '../styles/resets.styles.css';
-import 'react-alice-carousel/lib/alice-carousel.css';
+import 'swiper/css';
 import { useCurrentlyPlaying } from '../stores/currentlyPlaying.store';
 import { FlyoutPlayer } from '../components/FlyoutPlayer/FlyoutPlayer';
 import { Box, CssBaseline } from '@material-ui/core';
