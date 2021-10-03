@@ -27,9 +27,8 @@ const Home: NextPage<Props> = ({ postgresMovies, pagination }: Props) => {
   useEffect(() => {
     clearTimeout(currentTimeout.current);
     currentTimeout.current = setTimeout(changeMovie, 15000);
-
     return () => clearTimeout(currentTimeout.current);
-  }, []);
+  }, [randomMovie]);
 
   return (
     <>
@@ -88,7 +87,13 @@ export const getStaticProps = async () =>
             }
           }
         }
-      `
+      `,
+      {
+        paginationInput: {
+          amount: 50,
+          offset: 0,
+        },
+      }
     )
     .then(({ getPostgresMovies }) => {
       return {

@@ -1,7 +1,7 @@
 import { awsAxiosClient } from '../../clients/awsAxios.client';
 import * as Knex from 'knex';
 import { Tables } from '../../types/tables.enum';
-import { Pagination, PostgresMovie, QueryGetPostgresMovieArgs } from '../../types/generated.types';
+import { Pagination, PaginationInput, PostgresMovie, QueryGetPostgresMovieArgs } from '../../types/generated.types';
 import { repaginate, validatePagination } from '../../lib/serverPagination.lib';
 import { UserInputError } from 'apollo-server-express';
 import { paginatedDbGET } from '../../lib/paginatedDbGET.lib';
@@ -26,14 +26,14 @@ export const movieResolvers = {
     return dynamoMovies;
   },
 
-  getPostgresMovies: async (_: any, { paginationInput }: any, { db }: GraphQLContext) => {
+  getPostgresMovies: async (_: any, __: any, { db, request }: GraphQLContext) => {
     let postgresMovies!: PostgresMovie[];
     let pagination: Pagination = {
       total: 0,
     };
 
-    const offset = paginationInput?.offset;
-    const amount = paginationInput?.amount;
+    const offset = request?.body?.variables?.paginationInput?.offset ?? NaN;
+    const amount = request?.body?.variables?.paginationInput?.amount ?? NaN;
 
     const { valid, errors, messages } = validatePagination({ offset, amount });
     if (!valid) {

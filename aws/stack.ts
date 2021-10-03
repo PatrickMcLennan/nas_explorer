@@ -97,5 +97,3 @@ export class NasMediaStack extends cdk.Stack {
     backupsBucket.grantReadWrite(postPresignedUrlHandler);
   }
 }
-
-console.log(`hello`);

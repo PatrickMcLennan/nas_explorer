@@ -14,11 +14,14 @@ import { motion } from 'framer-motion';
 type Props = {
   movie?: PostgresMovie;
   collection?: Collection;
+  hideDescription?: boolean;
+  hideMoreInfo?: boolean;
+  hideLogo?: boolean;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
   buttonBox: {
-    marginTop: `2.5rem`,
+    marginTop: `auto`,
     display: `flex`,
     justifyContent: `flex-start`,
     width: `100%`,
@@ -52,6 +55,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
   logo: {
     maxWidth: `50vw`,
+    marginBottom: theme.spacing(2),
+
+    [theme.breakpoints.up(`sm`)]: {
+      marginBottom: 0,
+    },
   },
 
   meta: {
@@ -67,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: `2.2rem`,
     lineHeight: `normal`,
     marginTop: `auto`,
+    marginbottom: `2.5rem`,
     textAlign: `left`,
     maxWidth: `90%`,
 
@@ -111,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const Banner = (props: Props) => {
-  const { movie, collection } = props;
+  const { movie, collection, hideDescription, hideMoreInfo, hideLogo } = props;
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down(`sm`));
@@ -119,11 +128,10 @@ export const Banner = (props: Props) => {
   const router = useRouter();
 
   const truncatedText = useMemo(() => {
+    const overviewLength = movie?.overview?.length;
+    if (!overviewLength) return ``;
     const maxTextLength = isMobile ? 100 : 300;
-
-    return movie?.overview?.length > maxTextLength
-      ? `${movie?.overview?.substring?.(0, maxTextLength)} ...`
-      : movie?.overview;
+    return overviewLength > maxTextLength ? `${movie?.overview?.substring?.(0, maxTextLength)} ...` : movie?.overview;
   }, [movie?.overview, isMobile]);
 
   if (movie && !!movie?.trailers?.length) {
@@ -153,23 +161,24 @@ export const Banner = (props: Props) => {
         }}
       >
         <Box className={classes.details}>
-          {movie.logoPath ? (
+          {movie?.logoPath && !hideLogo && (
             <img
               className={classes.logo}
-              src={formatTmdbImageUrl(`w500/${movie.logoPath}`)}
-              alt={`${movie.title} logo`}
+              src={formatTmdbImageUrl(`w500/${movie?.logoPath}`)}
+              alt={`${movie?.title} logo`}
             />
-          ) : (
-            <Typography className={clsx(classes.title)}>{movie.title}</Typography>
           )}
-          <Typography className={clsx(classes.overview)}>{truncatedText}</Typography>
+          {!movie?.logoPath && !hideLogo && <Typography className={clsx(classes.title)}>{movie?.title}</Typography>}
+          {!hideDescription && <Typography className={clsx(classes.overview)}>{truncatedText}</Typography>}
           <Box className={classes.buttonBox}>
             <PlayButton onClick={() => router.push(`/movie/${movie.id}/play`)} accent={true} />
-            <MoreInfoButton
-              onClick={() => router.push(`/movie/${movie.id}`)}
-              accent={false}
-              className={classes.moreInfo}
-            />
+            {!hideMoreInfo && (
+              <MoreInfoButton
+                onClick={() => router.push(`/movie/${movie.id}`)}
+                accent={false}
+                className={classes.moreInfo}
+              />
+            )}
             {data?.searchMovieTrailersByKeyValue?.movieTrailers?.length && (
               <Box className={classes.trailerButtons}>
                 {data?.searchMovieTrailersByKeyValue?.movieTrailers?.map?.((trailer) => (
@@ -204,16 +213,15 @@ export const Banner = (props: Props) => {
         }}
       >
         <Box className={classes.details}>
-          {movie?.logoPath ? (
+          {movie?.logoPath && !hideLogo && (
             <img
               className={classes.logo}
               src={formatTmdbImageUrl(`w500/${movie?.logoPath}`)}
               alt={`${movie?.title} logo`}
             />
-          ) : (
-            <Typography className={clsx(classes.title)}>{movie?.title}</Typography>
           )}
-          <Typography className={clsx(classes.overview)}>{collection?.overview}</Typography>
+          {!movie?.logoPath && !hideLogo && <Typography className={clsx(classes.title)}>{movie?.title}</Typography>}
+          {!hideDescription && <Typography className={clsx(classes.overview)}>{collection?.overview}</Typography>}
           <Box className={classes.buttonBox}>
             <MoreInfoButton
               onClick={() => router.push(`/collection/${collection?.id}`)}

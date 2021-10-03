@@ -57,10 +57,7 @@ export default function CreateAccountForm({ onSubmit, loading }: Props) {
       className={`${classes.form} login-form`}
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit((formValues: CreateAccountFormType) => {
-        console.log(formValues);
-        onSubmit(formValues);
-      })}
+      onSubmit={handleSubmit((formValues: CreateAccountFormType) => onSubmit(formValues))}
     >
       <Controller
         control={control}
