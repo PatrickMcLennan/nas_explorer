@@ -35,25 +35,25 @@ export const MovieSwiper = ({ movies, heading }: Props) => {
         {heading}
       </Typography>
       <Swiper
-        breakpoints={{
-          [theme.breakpoints.values.xs]: {
-            slidesPerView: 2.5,
-          },
-          [theme.breakpoints.values.sm]: {
-            slidesPerView: 3.5,
-          },
-          [theme.breakpoints.values.md]: {
-            slidesPerView: 4.5,
-          },
-          [theme.breakpoints.values.lg]: {
-            slidesPerView: 5.5,
-          },
-          [theme.breakpoints.values.xl]: {
-            slidesPerView: 6.5,
-          },
-        }}
+        // breakpoints={{
+        //   [theme.breakpoints.values.xs]: {
+        //     slidesPerView: 2.5,
+        //   },
+        //   [theme.breakpoints.values.sm]: {
+        //     slidesPerView: 3.5,
+        //   },
+        //   [theme.breakpoints.values.md]: {
+        //     slidesPerView: 4.5,
+        //   },
+        //   [theme.breakpoints.values.lg]: {
+        //     slidesPerView: 5.5,
+        //   },
+        //   [theme.breakpoints.values.xl]: {
+        //     slidesPerView: 6.5,
+        //   },
+        // }}
         slidesOffsetAfter={theme.spacing(12)}
-        spaceBetween={20}
+        spaceBetween={10}
       >
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>

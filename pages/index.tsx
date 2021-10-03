@@ -62,6 +62,7 @@ export const getStaticProps = async () =>
                 id
                 tmdbId
                 imdbId
+                logoPath
                 originalLanguage
                 originalTitle
                 overview

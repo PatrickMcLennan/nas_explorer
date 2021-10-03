@@ -21,6 +21,7 @@ query getPostgresMovie($id: String!) {
     id
     tmdbId
     imdbId
+    logoPath
     originalLanguage
     originalTitle
     overview
@@ -58,6 +59,7 @@ query getPostgresMovies($paginationInput: PaginationInput) {
         id
         tmdbId
         imdbId
+        logoPath
         originalLanguage
         originalTitle
         overview

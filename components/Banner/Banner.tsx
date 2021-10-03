@@ -50,6 +50,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 3,
   },
 
+  logo: {
+    maxWidth: `50vw`,
+  },
+
   meta: {
     display: `block`,
   },
@@ -102,6 +106,8 @@ export const Banner = (props: Props) => {
   const { setCurrentlyPlaying } = useCurrentlyPlaying(({ setCurrentlyPlaying }) => ({ setCurrentlyPlaying }));
   const router = useRouter();
 
+  console.log(movie);
+
   if (movie && !!movie?.trailers?.length) {
     const [getTrailers, { data }] = useSearchMovieTrailersByKeyValueLazyQuery({
       variables: {
@@ -129,7 +135,15 @@ export const Banner = (props: Props) => {
         }}
       >
         <Box className={classes.details}>
-          <Typography className={clsx(classes.title)}>{movie.title}</Typography>
+          {movie.logoPath ? (
+            <img
+              className={classes.logo}
+              src={formatTmdbImageUrl(`w500/${movie.logoPath}`)}
+              alt={`${movie.title} logo`}
+            />
+          ) : (
+            <Typography className={clsx(classes.title)}>{movie.title}</Typography>
+          )}
           <Typography className={clsx(classes.overview)}>{movie.overview}</Typography>
           <Box className={classes.buttonBox}>
             <PlayButton onClick={() => router.push(`/movie/${movie.id}/play`)} accent={true} />

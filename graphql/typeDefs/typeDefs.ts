@@ -118,6 +118,7 @@ export const typeDefs = gql`
     id: String!
     tmdbId: String!
     imdbId: String
+    logoPath: String
     originalLanguage: String!
     originalTitle: String!
     overview: String
