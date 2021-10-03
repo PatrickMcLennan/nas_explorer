@@ -1,10 +1,10 @@
-import { Box, makeStyles, Typography, Theme, IconButton } from '@material-ui/core';
+import { Box, makeStyles, Typography, Theme, IconButton, useTheme, useMediaQuery } from '@material-ui/core';
 import { formatTmdbImageUrl } from '../../lib/formatTmdbImageUrl.lib';
 import { Collection, PostgresMovie } from '../../types/generated.types';
 import { PlayButton } from '../PlayButton/PlayButton';
 import { MoreInfoButton } from '../MoreInfoButton/MoreInfoButton';
 import { useSearchMovieTrailersByKeyValueLazyQuery } from '../../hooks/generated.hooks';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useCurrentlyPlaying } from '../../stores/currentlyPlaying.store';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -64,10 +64,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 
   overview: {
-    fontSize: `2.3rem`,
+    fontSize: `2.2rem`,
     lineHeight: `normal`,
     marginTop: `auto`,
     textAlign: `left`,
+    maxWidth: `90%`,
+
+    [theme.breakpoints.up(`sm`)]: {
+      fontSize: `2rem`,
+      maxWidth: `75%`,
+    },
+
+    [theme.breakpoints.up(`md`)]: {
+      fontSize: `2.2rem`,
+    },
   },
 
   play: {
@@ -103,10 +113,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Banner = (props: Props) => {
   const { movie, collection } = props;
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(`sm`));
   const { setCurrentlyPlaying } = useCurrentlyPlaying(({ setCurrentlyPlaying }) => ({ setCurrentlyPlaying }));
   const router = useRouter();
 
-  console.log(movie);
+  const truncatedText = useMemo(() => {
+    const maxTextLength = isMobile ? 100 : 300;
+
+    return movie?.overview?.length > maxTextLength
+      ? `${movie?.overview?.substring?.(0, maxTextLength)} ...`
+      : movie?.overview;
+  }, [movie?.overview, isMobile]);
 
   if (movie && !!movie?.trailers?.length) {
     const [getTrailers, { data }] = useSearchMovieTrailersByKeyValueLazyQuery({
@@ -144,7 +162,7 @@ export const Banner = (props: Props) => {
           ) : (
             <Typography className={clsx(classes.title)}>{movie.title}</Typography>
           )}
-          <Typography className={clsx(classes.overview)}>{movie.overview}</Typography>
+          <Typography className={clsx(classes.overview)}>{truncatedText}</Typography>
           <Box className={classes.buttonBox}>
             <PlayButton onClick={() => router.push(`/movie/${movie.id}/play`)} accent={true} />
             <MoreInfoButton
@@ -186,7 +204,15 @@ export const Banner = (props: Props) => {
         }}
       >
         <Box className={classes.details}>
-          <Typography className={clsx(classes.title)}>{collection?.name}</Typography>
+          {movie?.logoPath ? (
+            <img
+              className={classes.logo}
+              src={formatTmdbImageUrl(`w500/${movie?.logoPath}`)}
+              alt={`${movie?.title} logo`}
+            />
+          ) : (
+            <Typography className={clsx(classes.title)}>{movie?.title}</Typography>
+          )}
           <Typography className={clsx(classes.overview)}>{collection?.overview}</Typography>
           <Box className={classes.buttonBox}>
             <MoreInfoButton

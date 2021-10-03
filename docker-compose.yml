@@ -36,7 +36,7 @@ services:
 
   node:
     image: node:14.17.0
-    # restart: unless-stopped
+    restart: unless-stopped
     ports:
       - '3000:3000'
       - '${HTTP_PORT}:${HTTP_PORT}'
